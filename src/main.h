@@ -17,6 +17,7 @@ typedef struct categories
     char name[3];
     books_t *books;
     struct categories *next;
+
 } categories_t;
 
 typedef struct borrow
@@ -24,3 +25,7 @@ typedef struct borrow
     int number;
     int date;
 } barrow_t;
+
+categories_t *CreateCategorie(char[3], books_t *);
+books_t *CreateBook(int, char[10]);
+void AddBook(categories_t *, int, char[10]);
