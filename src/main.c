@@ -28,11 +28,23 @@ void AddCategorie(categories_t *lib, char name[3], books_t *book)
     lib->next = cat;
 }
 
+
+void AddBook(categories_t *Cat, int number, char title[10]){
+    books_t *book = malloc(sizeof(*book));
+    book->number=number;
+    strcpy(book->title, title);
+    book->next = Cat->books;
+    Cat->books=book;
+
+}
+
 int main()
-{
+{ 
     books_t *livre = CreateBook(1, "Harie Pôteure");
     categories_t *library = CreateCategorie("FAN", livre);
     books_t *livre2 = CreateBook(3, "BO2LR");
     AddCategorie(library, "ROM", livre2);
+    categories_t *TES = CreateCategorie("LOL", livre);
+    AddBook(TES, 15, "Maxime");
     return 0;
 }
