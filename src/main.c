@@ -46,6 +46,7 @@ void AddCategorie(categories_t *lib, char name[3], books_t *book)
 
 void AddBook(categories_t *Cat, int number, char title[10])
 {
+
     books_t *book = malloc(sizeof(*book));
     book->number = number;
     strcpy(book->title, title);
@@ -80,7 +81,29 @@ void AddBook(categories_t *Cat, int number, char title[10])
     }
 }
 
-int main()
+void AddBookWithCategoryName(categories_t *lib, char name[3], int number, char title[10])
+{
+    categories_t *cour = lib;
+    while (strcmp(cour->name, name) != 0)
+    {
+        cour = cour->next;
+    }
+    AddBook(cour, number, title);
+}
+
+void AddFichier(char *path)
+{
+    FILE *file = fopen(path, "r");
+    if (file != NULL)
+    {
+    }
+    else
+    {
+        printf("erreur");
+    }
+}
+
+int main(int argc, char **argv)
 { /*
         books_t *livre = CreateBook(1, "Harie Pôteure");
         categories_t *library = CreateCategorie("FAN", livre);
@@ -89,11 +112,18 @@ int main()
         categories_t *TES = CreateCategorie("LOL", livre);
         AddBook(TES, 15, "Maxime");
         */
+    /*
     categories_t *library = CreateCategorie("FAN", NULL);
-    AddBook(library, 3, "La vie de Louiso");
+    AddBook(library, 3, "La vie de Louis");
     AddBook(library, 1, "la vie de Lucas");
     AddBook(library, 2, "la vie de Max");
     AddBook(library, 4, "la vie de Etiene");
-    AfficheBibli(library);
-    return 0;
+    AddCategorie(library, "ROM", NULL);
+    AddBookWithCategoryName(library, "ROM", 2, "Language C");
+    AddBookWithCategoryName(library, "ROM", 1, "Language Java");
+    AddBookWithCategoryName(library, "ROM", 3, "Language JS");
+    */
+    AddFichier(argv[1])
+
+        return 0;
 }

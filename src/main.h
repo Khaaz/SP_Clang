@@ -31,3 +31,5 @@ books_t *CreateBook(int, char[10]);
 void AddBook(categories_t *, int, char[10]);
 void AddCategorie(categories_t *, char[3], books_t *);
 void AfficheBibli(categories_t *);
+void AddBookWithCategoryName(categories_t *, char[3], int, char[10]);
+void AddFichier(char *);
