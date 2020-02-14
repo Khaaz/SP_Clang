@@ -8,12 +8,9 @@
         "editor.insertSpaces": true,
         "editor.autoIndent": "full",
         "editor.tabSize": 4,
-
         "editor.wordWrap": "off",
         "files.eol": "\n",
-
         "editor.formatOnSave": true,
-
         // files
         "files.insertFinalNewline": true,
     }
