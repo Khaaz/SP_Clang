@@ -3,14 +3,14 @@
 #include <stdlib.h>
 #include <string.h>
 
-void AfficheBibli(categories_t *library)
+void AfficheBibli(categories_t * library)
 {
-    categories_t *cour1 = library;
-    while (cour1 != NULL)
+    categories_t * cour1 = library;
+    while(cour1 != NULL)
     {
         printf(" \n Categorie : %s : ", cour1->name);
-        books_t *cour2 = cour1->books;
-        while (cour2 != NULL)
+        books_t * cour2 = cour1->books;
+        while(cour2 != NULL)
         {
             printf(" \n livre N %d : %s", cour2->number, cour2->title);
             cour2 = cour2->next;
@@ -19,56 +19,56 @@ void AfficheBibli(categories_t *library)
     }
 }
 
-categories_t *CreateCategorie(char name[3], books_t *books)
+categories_t * CreateCategorie(char name[3], books_t * books)
 {
-    categories_t *cat = malloc(sizeof(*cat));
+    categories_t * cat = malloc(sizeof(*cat));
     strcpy(cat->name, name);
-    cat->next = NULL;
+    cat->next  = NULL;
     cat->books = books;
     return cat;
 }
 
-books_t *CreateBook(int number, char title[10])
+books_t * CreateBook(int number, char title[10])
 {
-    books_t *book = malloc(sizeof(*book));
-    book->number = number;
+    books_t * book = malloc(sizeof(*book));
+    book->number   = number;
     strcpy(book->title, title);
-    book->next = NULL;
+    book->next    = NULL;
     book->isTaken = false;
     return book;
 }
 
-void AddCategorie(categories_t *lib, char name[3], books_t *book)
+void AddCategorie(categories_t * lib, char name[3], books_t * book)
 {
-    categories_t *cat = CreateCategorie(name, book);
-    lib->next = cat;
+    categories_t * cat = CreateCategorie(name, book);
+    lib->next          = cat;
 }
 
-void AddBook(categories_t *Cat, int number, char title[10])
+void AddBook(categories_t * Cat, int number, char title[10])
 {
 
-    books_t *book = malloc(sizeof(*book));
-    book->number = number;
+    books_t * book = malloc(sizeof(*book));
+    book->number   = number;
     strcpy(book->title, title);
 
-    if (Cat->books == NULL)
+    if(Cat->books == NULL)
     {
         Cat->books = book;
         book->next = NULL;
     }
-    else if (Cat->books->number > number)
+    else if(Cat->books->number > number)
     {
         book->next = Cat->books;
         Cat->books = book;
     }
     else
     {
-        books_t *prec = Cat->books;
-        while (prec->next != NULL && (prec->next->number <= number))
+        books_t * prec = Cat->books;
+        while(prec->next != NULL && (prec->next->number <= number))
         {
             prec = prec->next;
         }
-        if (prec->next == NULL)
+        if(prec->next == NULL)
         {
             book->next = NULL;
             prec->next = book;
@@ -81,12 +81,11 @@ void AddBook(categories_t *Cat, int number, char title[10])
     }
 }
 
-void AddBookWithCategoryName(categories_t *lib, char name[3], int number, char title[13])
+void AddBookWithCategoryName(categories_t * lib, char name[3], int number,
+                             char title[10])
 {
-
-
-    categories_t *cour = lib;
-    while (strcmp(cour->name, name) != 0)
+    categories_t * cour = lib;
+    while(strcmp(cour->name, name) != 0)
     {
         cour = cour->next;
     }
@@ -149,7 +148,7 @@ void AddFichier(char *path, categories_t *lib)
     }
 }
 
-int main(int argc, char **argv)
+int main(int argc, char ** argv)
 { /*
         books_t *livre = CreateBook(1, "Harie Pôteure");
         categories_t *library = CreateCategorie("FAN", livre);
