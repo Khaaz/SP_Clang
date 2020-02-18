@@ -120,7 +120,7 @@ void AddFichier(char * path, categories_t * lib)
             for(i = 0; i < nbrLivres; i++)
             {
                 fscanf(file, "%d", &number);
-                fgets(title, 5000, file);
+                fgets(title, 12, file);
                 AddBook(cat, number, title);
             }
             fscanf(file, "%s %d", category, &nbrLivres);
@@ -131,6 +131,26 @@ void AddFichier(char * path, categories_t * lib)
     {
 
         printf("erreur");
+    }
+}
+borrow_t * initBorrow()
+{
+    borrow_t * bow = malloc(sizeof(bow));
+    return bow;
+}
+void AddBorrow(borrow_t * bow, char * path)
+{
+    int    number = 0, annee = 0, mois = 0, jour = 0;
+    FILE * file = fopen(path, "r");
+    if(file != NULL)
+    {
+        fscanf(file, "%d %d %d %d", &number, &annee, &mois, &jour);
+        while(!feof(file))
+        {
+            if(existBook(number))
+            {
+            }
+        }
     }
 }
 
