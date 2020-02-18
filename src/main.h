@@ -26,10 +26,10 @@ typedef struct borrow
     int date;
 } barrow_t;
 
-categories_t *CreateCategorie(char[3], books_t *);
-books_t *CreateBook(int, char[10]);
-void AddBook(categories_t *, int, char[10]);
-void AddCategorie(categories_t *, char[3], books_t *);
-void AfficheBibli(categories_t *);
-void AddBookWithCategoryName(categories_t *, char[3], int, char[15]);
-void AddFichier(char *, categories_t *);
+categories_t * CreateCategorie(char[3], books_t *);
+books_t *      CreateBook(int, char[10]);
+void           AddBook(categories_t *, int, char[10]);
+categories_t * AddCategorie(categories_t *, char[3], books_t *);
+void           AfficheBibli(categories_t *);
+void           AddBookWithCategoryName(categories_t *, char[3], int, char[15]);
+void           AddFichier(char *, categories_t *);

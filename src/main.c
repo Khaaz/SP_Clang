@@ -38,10 +38,20 @@ books_t * CreateBook(int number, char title[10])
     return book;
 }
 
-void AddCategorie(categories_t * lib, char name[3], books_t * book)
+categories_t * AddCategorie(categories_t * lib, char name[3], books_t * book)
 {
     categories_t * cat = CreateCategorie(name, book);
-    lib->next          = cat;
+    if(lib->next == NULL)
+    {
+        lib->next = cat;
+    }
+    else
+    {
+        cat->next = lib->next;
+        lib->next = cat;
+    }
+
+    return cat;
 }
 
 void AddBook(categories_t * Cat, int number, char title[10])
@@ -92,54 +102,30 @@ void AddBookWithCategoryName(categories_t * lib, char name[3], int number,
     AddBook(cour, number, title);
 }
 
-void AddFichier(char *path, categories_t *lib)
+void AddFichier(char * path, categories_t * lib)
 {
-    char chaine[50];
-    char category[4];
-    char title[11];
-    int nbrLivres = 0;
-    int number = 0;
-    int i;
-    FILE *file = fopen(path, "r");
-    if (file != NULL)
+    categories_t * cat;
+    char           category[4];
+    char           title[11];
+    int            nbrLivres = 0;
+    int            number    = 0;
+    int            i;
+    FILE *         file = fopen(path, "r");
+    if(file != NULL)
     {
-        while (!feof(file)){
-            fread(&category, sizeof(category), 1, file);
-            fscanf(file, "%d", &nbrLivres);
-            printf("category : %s \n", category);
-
-            printf("nb livres  : %d \n", nbrLivres);
-            AddCategorie(lib, category, NULL);
-            
-            for (i = 0 ;nbrLivres+1; i++)
+        fscanf(file, "%s %d", category, &nbrLivres);
+        while(!feof(file))
+        {
+            cat = AddCategorie(lib, category, NULL);
+            for(i = 0; i < nbrLivres; i++)
             {
-            printf("passage N %d \n", i);
-            fscanf(file, "%d", &number);
-            printf("number :   : %d \n", number);
-            fgets(title, 12, file);
-            printf(" name category : %s\n ", category);
-            printf("title  : %s \n", title);
-            AddBookWithCategoryName(lib, category, number, title);
-            printf("ok \n");
+                fscanf(file, "%d", &number);
+                fgets(title, 5000, file);
+                AddBook(cat, number, title);
             }
-
-
-
+            fscanf(file, "%s %d", category, &nbrLivres);
         }
-        /*while (!feof(file))
-        {
-        fgets(category, 4, file);
-        fscanf(file, "%d", &nbrLivres);
-        printf("categorie : %s \n", category);
-        printf("nbr de livres  : %d \n", nbrLivres);
-        AddCategorie(lib, category, NULL);
-        for (int i = 0; i < nbrLivres; i++)
-        {
-            fscanf(file, "%d", &number);
-            fgets(title, 12, file);
-            AddBookWithCategoryName(lib, category, number, title);
-        }
-        }*/
+        fclose(file);
     }
     else
     {
@@ -168,9 +154,9 @@ int main(int argc, char ** argv)
     AddBookWithCategoryName(library, "ROM", 1, "Language Java");
     AddBookWithCategoryName(library, "ROM", 3, "Language JS");
     */
-    categories_t *library = CreateCategorie("FAN", NULL);
+    categories_t * library = CreateCategorie("FAN", NULL);
     AddFichier(argv[1], library);
-    // AfficheBibli(library);
+    AfficheBibli(library);
 
     return 0;
 }
