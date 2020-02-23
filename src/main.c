@@ -136,21 +136,114 @@ void AddFichier(char * path, categories_t * lib)
 borrow_t * initBorrow()
 {
     borrow_t * bow = malloc(sizeof(bow));
+    bow->date      = 0;
+    bow->number    = 0;
+    bow->next      = NULL;
     return bow;
 }
-void AddBorrow(borrow_t * bow, char * path)
+books_t * existBook(int number, categories_t * lib)
 {
-    int    number = 0, annee = 0, mois = 0, jour = 0;
-    FILE * file = fopen(path, "r");
-    if(file != NULL)
+    categories_t * cour = lib;
+    while(cour != NULL)
     {
-        fscanf(file, "%d %d %d %d", &number, &annee, &mois, &jour);
-        while(!feof(file))
+        books_t * cour2 = cour->books;
+        while(cour2 != NULL)
         {
-            if(existBook(number))
+            if(cour2->number == number)
             {
+                return cour2;
+            }
+            else
+            {
+                cour2 = cour2->next;
             }
         }
+        cour = cour->next;
+    }
+    return NULL;
+}
+
+void AddBorrowFromFile(borrow_t * bow, char * path, categories_t * lib)
+{
+    int       number = 0;
+    char      annee[5], mois[3], jour[3], date[11];
+    books_t * book;
+    FILE *    file = fopen(path, "r");
+    if(file != NULL)
+    {
+        fscanf(file, "%d %s %s %s", &number, annee, mois, jour);
+
+        while(!feof(file))
+        {
+
+            book = existBook(number, lib);
+            if(book != NULL)
+            {
+                book->isTaken = true;
+                strcpy(date, annee);
+                strcat(date, strcat(mois, jour));
+                bow = AddBorrow(bow, atoi(date), number);
+            }
+            else
+            {
+                printf("le livre n'existe pas\n");
+            }
+            fscanf(file, "%d %s %s %s", &number, annee, mois, jour);
+        }
+        fclose(file);
+    }
+}
+borrow_t * AddBorrow(borrow_t * bow, int date, int number)
+{
+
+    if(bow->date == 0)
+    {
+        bow->date   = date;
+        bow->number = number;
+        return bow;
+    }
+    else
+    {
+        borrow_t * borrow = malloc(sizeof(*borrow));
+        borrow->number    = number;
+        borrow->date      = date;
+        borrow->next      = NULL;
+        if(bow->date > date)
+        {
+            borrow->next = bow;
+            return borrow;
+        }
+        else
+        {
+
+            borrow_t * prec = bow;
+
+            while(prec->next != NULL && prec->next->date < date)
+            {
+                prec = prec->next;
+            }
+            if(prec->next == NULL)
+            {
+                prec->next = borrow;
+                return bow;
+            }
+            else
+            {
+                borrow->next = prec->next;
+                prec->next   = borrow;
+                return bow;
+            }
+        }
+    }
+}
+void AfficheBorrow(borrow_t * bow)
+{
+    borrow_t * cour = bow;
+    while(cour != NULL)
+    {
+        printf(" \n numero livre : %d \n  ", cour->number);
+        printf("date de retour : %d ", cour->date);
+        cour = cour->next;
     }
 }
 
@@ -163,20 +256,28 @@ int main(int argc, char ** argv)
         categories_t *TES = CreateCategorie("LOL", livre);
         AddBook(TES, 15, "Maxime");
         */
-    /*
-    categories_t *library = CreateCategorie("FAN", NULL);
+
+    categories_t * library = CreateCategorie("FAN", NULL);
     AddBook(library, 3, "La vie de Louis");
     AddBook(library, 1, "la vie de Lucas");
     AddBook(library, 2, "la vie de Max");
     AddBook(library, 4, "la vie de Etiene");
     AddCategorie(library, "ROM", NULL);
-    AddBookWithCategoryName(library, "ROM", 2, "Language C");
-    AddBookWithCategoryName(library, "ROM", 1, "Language Java");
-    AddBookWithCategoryName(library, "ROM", 3, "Language JS");
-    */
-    categories_t * library = CreateCategorie("FAN", NULL);
-    AddFichier(argv[1], library);
-    AfficheBibli(library);
+    AddBookWithCategoryName(library, "ROM", 18, "Language C");
+    AddBookWithCategoryName(library, "ROM", 13, "Language Java");
+    AddBookWithCategoryName(library, "ROM", 25, "Language JS");
+    // AfficheBibli(library);
+    // printf("\nexist book : %d", existBook(25, library));
+
+    // categories_t * library = CreateCategorie("FAN", NULL);
+    borrow_t * bow = initBorrow();
+    AddBorrowFromFile(bow, argv[1], library);
+
+    AfficheBorrow(bow);
+
+    // AddBorrowFromFile(bow, argv[1], library);
+    // AddFichier(argv[1], library);
+    // AfficheBibli(library);
 
     return 0;
 }
