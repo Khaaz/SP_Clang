@@ -34,7 +34,8 @@ void           AfficheBibli(categories_t *);
 void           AddBookWithCategoryName(categories_t *, char[3], int, char[15]);
 void           AddFichier(char *, categories_t *);
 
-void       AddBorrowFromFile(borrow_t *, char *, categories_t *);
+int        isTaken(books_t *);
+borrow_t * AddBorrowFromFile(borrow_t *, char *, categories_t *);
 borrow_t * RemoveBorrowFromFile(borrow_t *, char *);
 borrow_t * AddBorrow(borrow_t *, int, int);
 borrow_t * initBorrow();

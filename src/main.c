@@ -57,9 +57,7 @@ categories_t * AddCategorie(categories_t * lib, char name[3], books_t * book)
 void AddBook(categories_t * Cat, int number, char title[10])
 {
 
-    books_t * book = malloc(sizeof(*book));
-    book->number   = number;
-    strcpy(book->title, title);
+    books_t * book = CreateBook(number, title);
 
     if(Cat->books == NULL)
     {
@@ -113,9 +111,10 @@ void AddFichier(char * path, categories_t * lib)
     FILE *         file = fopen(path, "r");
     if(file != NULL)
     {
-        fscanf(file, "%s %d", category, &nbrLivres);
+
         while(!feof(file))
         {
+            fscanf(file, "%s %d", category, &nbrLivres);
             cat = AddCategorie(lib, category, NULL);
             for(i = 0; i < nbrLivres; i++)
             {
@@ -123,7 +122,7 @@ void AddFichier(char * path, categories_t * lib)
                 fgets(title, 12, file);
                 AddBook(cat, number, title);
             }
-            fscanf(file, "%s %d", category, &nbrLivres);
+            // fscanf(file, "%s %d", category, &nbrLivres);
         }
         fclose(file);
     }
@@ -163,39 +162,54 @@ books_t * existBook(int number, categories_t * lib)
     return NULL;
 }
 
-void AddBorrowFromFile(borrow_t * bow, char * path, categories_t * lib)
+int isTaken(books_t * book)
 {
-    int       number = 0;
-    char      annee[5], mois[3], jour[3], date[11];
+    if(book->isTaken == 0)
+    {
+        return 0;
+    }
+    else
+    {
+        return 1;
+    }
+}
+borrow_t * AddBorrowFromFile(borrow_t * bow, char * path, categories_t * lib)
+{
+    int       number = 0, date = 0;
     books_t * book;
     FILE *    file = fopen(path, "r");
     if(file != NULL)
     {
-        fscanf(file, "%d %s %s %s", &number, annee, mois, jour);
 
         while(!feof(file))
         {
-
+            fscanf(file, "%d %d", &number, &date);
             book = existBook(number, lib);
             if(book != NULL)
             {
-                book->isTaken = true;
-                strcpy(date, annee);
-                strcat(date, strcat(mois, jour));
-                bow = AddBorrow(bow, atoi(date), number);
+                if(isTaken(book) == 0)
+                {
+
+                    bow           = AddBorrow(bow, date, number);
+                    book->isTaken = true;
+                }
+                else
+                {
+                    printf("le livre N %d est deja emprunte\n", number);
+                }
             }
             else
             {
-                printf("le livre n'existe pas\n");
+                printf("le livre N %d n'existe pas:  \n", number);
             }
-            fscanf(file, "%d %s %s %s", &number, annee, mois, jour);
         }
         fclose(file);
     }
+    return bow;
 }
+
 borrow_t * AddBorrow(borrow_t * bow, int date, int number)
 {
-
     if(bow->date == 0)
     {
         bow->date   = date;
@@ -222,17 +236,9 @@ borrow_t * AddBorrow(borrow_t * bow, int date, int number)
             {
                 prec = prec->next;
             }
-            if(prec->next == NULL)
-            {
-                prec->next = borrow;
-                return bow;
-            }
-            else
-            {
-                borrow->next = prec->next;
-                prec->next   = borrow;
-                return bow;
-            }
+            borrow->next = prec->next;
+            prec->next   = borrow;
+            return bow;
         }
     }
 }
@@ -309,6 +315,7 @@ int main(int argc, char ** argv)
         */
 
     categories_t * library = CreateCategorie("FAN", NULL);
+
     AddBook(library, 3, "La vie de Louis");
     AddBook(library, 1, "la vie de Lucas");
     AddBook(library, 2, "la vie de Max");
@@ -322,16 +329,15 @@ int main(int argc, char ** argv)
 
     // categories_t * library = CreateCategorie("FAN", NULL);
     borrow_t * bow = initBorrow();
-    AddBorrowFromFile(bow, argv[1], library);
+    bow            = AddBorrowFromFile(bow, argv[1], library);
 
     AfficheBorrow(bow);
 
-    bow = removeBorrowFromFile(bow, argv[2]);
-    printf("\n ok \n");
-    AfficheBorrow(bow);
+    // bow = removeBorrowFromFile(bow, argv[2]);
+    // printf("\n ok \n");
+    // AfficheBorrow(bow);
     // AddBorrowFromFile(bow, argv[1], library);
     // AddFichier(argv[1], library);
     // AfficheBibli(library);
-
     return 0;
 }
