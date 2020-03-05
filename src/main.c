@@ -247,6 +247,57 @@ void AfficheBorrow(borrow_t * bow)
     }
 }
 
+borrow_t * removeBorrow(borrow_t * bow, int num)
+{
+    if(bow->number == num)
+    {
+
+        borrow_t * cour = bow->next;
+        borrow_t * prec = bow;
+        free(prec);
+        return cour;
+    }
+    else
+    {
+        borrow_t * prec = bow;
+        while(prec->next->number != num)
+        {
+            prec = prec->next;
+        }
+        if(prec->next->next == NULL)
+        {
+            free(prec->next);
+            prec->next = NULL;
+            return bow;
+        }
+        else
+        {
+            borrow_t * cour = prec->next->next;
+            free(prec->next);
+            prec->next = cour;
+            return bow;
+        }
+    }
+}
+
+borrow_t * removeBorrowFromFile(borrow_t * bow, char * path)
+{
+    int    number;
+    FILE * file = fopen(path, "r");
+    if(file != NULL)
+    {
+        fscanf(file, "%d", &number);
+
+        while(!feof(file))
+        {
+            printf("\n numero a supprime : %d", number);
+            bow = removeBorrow(bow, number);
+            fscanf(file, "%d", &number);
+        }
+        fclose(file);
+    }
+    return bow;
+}
 int main(int argc, char ** argv)
 { /*
         books_t *livre = CreateBook(1, "Harie Pôteure");
@@ -275,6 +326,9 @@ int main(int argc, char ** argv)
 
     AfficheBorrow(bow);
 
+    bow = removeBorrowFromFile(bow, argv[2]);
+    printf("\n ok \n");
+    AfficheBorrow(bow);
     // AddBorrowFromFile(bow, argv[1], library);
     // AddFichier(argv[1], library);
     // AfficheBibli(library);
