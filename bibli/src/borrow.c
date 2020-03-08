@@ -14,14 +14,19 @@ void AfficheBorrow(borrow_t * bow)
     }
 }
 
-borrow_t * initBorrow()
+borrow_t * initBorrow(int date, int number)
 {
     borrow_t * bow = malloc(sizeof(bow));
-    bow->date      = 0;
-    bow->number    = 0;
+    bow->date      = date;
+    bow->number    = number;
     bow->next      = NULL;
-    tete_t * tete  = malloc(sizei(*tete));
-    tete->first    = bow;
+    return bow;
+}
+
+tete_t * initTete()
+{
+    tete_t * tete = malloc(sizeof(*tete));
+    tete->first   = NULL;
     return tete;
 }
 /*
@@ -60,53 +65,24 @@ borrow_t * AddBorrowFromFile(borrow_t * bow, char * path, categories_t * lib)
     return bow;
 }
 */
-void AddBorrow(borrow_t * bow, int date, int number)
+void AddBorrow(tete_t * tete, int date, int number)
 {
-    borrow_t * borrow = malloc(sizeof(*borrow));
-    borrow->number    = number;
-    borrow->date      = date;
-    borrow->next      = NULL;
-    if(bow->date == 0)
+    borrow_t *  borrow = initBorrow(date, number); // next à NULL
+    borrow_t ** prec   = &(tete->first);
+    printf("ok1");
+    borrow_t * cour = tete->first;
+    // printf("cour : %p\n", cour);
+
+    while(cour != NULL && cour->date < date)
     {
-        bow->date   = date;
-        bow->number = number;
+        // prec = &(cour->next);
+        cour = cour->next;
+        prec = &((*prec)->next);
     }
-    else if(bow->date > date)
-    {
-        bow->next = borrow;
-        bow       = borrow;
-    }
-    else
-    {
+    printf("issou\n%p\n%p\n%p\n%p\n", borrow, borrow->next, *prec, cour);
 
-        borrow_t * prec = bow;
-        while(prec->next != NULL && prec->next->date < date)
-        {
-            prec = prec->next;
-        }
-        borrow->next = prec->next;
-        prec->next   = borrow;
-
-        /*
-        if(bow->date > date)
-        {
-            borrow->next = bow;
-            return borrow;
-        }
-        else
-        {
-
-            borrow_t * prec = bow;
-
-            while(prec->next != NULL && prec->next->date < date)
-            {
-                prec = prec->next;
-            }
-            borrow->next = prec->next;
-            prec->next   = borrow;
-            return bow;
-        }*/
-    }
+    borrow->next = cour;
+    (*prec)      = borrow;
 }
 
 borrow_t * removeBorrow(borrow_t * bow, int num)
@@ -164,10 +140,18 @@ borrow_t * removeBorrowFromFile(borrow_t * bow, char * path)
 int main()
 {
 
-    borrow_t * borrow = initBorrow();
-    AddBorrow(borrow, 20201112, 15);
-    AddBorrow(borrow, 20181215, 13);
-    AddBorrow(borrow, 20191111, 16);
-    AfficheBorrow(borrow);
+    tete_t * tete = initTete();
+    AddBorrow(tete, 20201111, 15);
+    AfficheBorrow(tete->first);
+    // printf("ok5");
+    AddBorrow(tete, 20191111, 13);
+    AfficheBorrow(tete->first);
+    AddBorrow(tete, 20181211, 20);
+
+    // borrow_t * borrow = initBorrow();
+    // AddBorrow(borrow, 20201112, 15);
+    // AddBorrow(borrow, 20181215, 13);
+    // AddBorrow(borrow, 20191111, 16);
+    AfficheBorrow(tete->first);
     return 0;
 }
