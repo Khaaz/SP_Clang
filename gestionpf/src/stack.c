@@ -1,8 +1,9 @@
-#include "stack.h"
 #include <stdio.h>
 #include <stdlib.h>
 
-stack_t * create(int capacity)
+#include "stack.h"
+
+stack_t * createStack(int capacity)
 {
     stack_t * stack = malloc(sizeof(*stack));
     stack->capacity = capacity;
@@ -11,7 +12,7 @@ stack_t * create(int capacity)
     return stack;
 }
 
-void display(stack_t * stack)
+void displayStack(stack_t * stack)
 {
     for(int i = 0; i < stack->top + 1; i++)
     {
@@ -54,15 +55,16 @@ T peek(stack_t * stack)
     if(isEmpty(stack))
     {
         t = 0;
-    }else
+    }
+    else
     {
         t = stack->base[stack->top];
     }
-    
+
     return t;
 }
 
-int isEmpty(stack_t * stack)
+int isEmptyStack(stack_t * stack)
 {
     int success = 0;
     if(stack->top == -1)
@@ -72,10 +74,10 @@ int isEmpty(stack_t * stack)
     return success;
 }
 
-
-void freeStack(stack_t * stack){
+void freeStack(stack_t * stack)
+{
 
     free(stack->base);
     free(stack);
-    stack=NULL;
+    stack = NULL;
 }
