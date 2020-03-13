@@ -35,7 +35,7 @@ int pushBack(queue_t * queue, T element)
     {
         queue->base[queue->tail] = element;
 
-        if(queue->tail + 1 == queue->capacity)
+        if(queue->tail + 1 > queue->capacity)
         {
             queue->tail = 0;
         }
@@ -56,7 +56,7 @@ int popFront(queue_t * queue)
     }
     else
     {
-        if(queue->head == queue->capacity)
+        if(queue->head > queue->capacity)
         {
             queue->head = 0;
         }
