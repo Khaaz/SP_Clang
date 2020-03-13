@@ -13,3 +13,4 @@ int       pop(stack_t *);
 T         peek(stack_t *); // affiche dernier elmt
 int       isEmpty(stack_t *);
 void      display(stack_t *);
+void      freeStack(stack_t *);

@@ -50,11 +50,15 @@ int pop(stack_t * stack)
 
 T peek(stack_t * stack)
 {
-    T t = stack->base[stack->top];
+    T t;
     if(isEmpty(stack))
     {
         t = 0;
+    }else
+    {
+        t = stack->base[stack->top];
     }
+    
     return t;
 }
 
@@ -66,4 +70,12 @@ int isEmpty(stack_t * stack)
         error = 1;
     }
     return error;
+}
+
+
+void freeStack(stack_t * stack){
+
+    free(stack->base);
+    free(stack);
+    stack=NULL;
 }
