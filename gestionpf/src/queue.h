@@ -1,5 +1,3 @@
-#include <stdio.h>
-
 typedef int T;
 
 typedef struct queue
@@ -11,10 +9,11 @@ typedef struct queue
     T * base;
 } queue_t;
 
-queue_t * create(int);
-void      pushBack();
-void      popFront();
-void      front();
-void      back();
-void      isEmpty();
-void      display(queue_t);
+queue_t * createQueue(int);
+int       pushBack(queue_t *, T);
+int       popFront(queue_t *);
+T         front(queue_t *);
+T         back(queue_t *);
+int       isEmptyQueue(queue_t *);
+void      displayQueue(queue_t *);
+void      freeQueue(queue_t *);

@@ -1,3 +1,6 @@
+#include <stdio.h>
+#include <stdlib.h>
+
 #include "queue.h"
 
 queue_t * create(int capacity)
@@ -9,23 +12,101 @@ queue_t * create(int capacity)
     queue->base     = malloc(capacity * sizeof(T));
     queue->head     = -1;
     queue->tail     = -1;
+    return queue;
 }
 
-void display(queue)
+void displayQueue(queue_t * queue)
 {
     int i = queue->head;
-    while(i != queue->end)
+    while(i != queue->tail)
     {
         printf("%d\n", queue->base[i]);
         i = (i + 1) % queue->capacity;
     }
 }
 
-/*
-void      pushBack();
-void      popFront();
-void      front();
-void      back();
-void      isEmpty();
-void      display(queue_t);
-*/
+int pushBack(queue_t * queue, T element)
+{
+    int success = 1;
+    if(queue->size == queue->capacity)
+    {
+        success = 0;
+    }
+    else
+    {
+        queue->size += 1;
+
+        if(queue->tail + 1 == queue->capacity)
+        {
+            queue->tail->0;
+        }
+        else
+        {
+            queue->tail += 1;
+        }
+
+        queue->base[queue->tail] = element;
+    }
+    return success;
+}
+
+int popFront(queue_t * queue)
+{
+    int success = 1;
+    if(isEmpty(queue))
+    {
+        success = 0;
+    }
+    else
+    {
+        queue->size -= 1;
+
+        if(queue->head == queue->capacity)
+        {
+            queue->head = 0;
+        }
+        else
+        {
+            queue->head += 1;
+        }
+    }
+    return success;
+}
+
+T front(queue_t * queue)
+{
+    T element;
+    if(isEmpty(queue))
+    {
+        element = 0;
+    }
+    return queue->base[queue->head];
+}
+
+T back(queue_t * queue)
+{
+    T element;
+    if(isEmpty(queue))
+    {
+        element = 0;
+    }
+    return queue->base[queue->tail];
+}
+
+int isEmptyQueue(queue_t * queue)
+{
+    int empty = 0;
+    if(queue->size == 0)
+    {
+        empty = 1;
+    }
+    return empty;
+}
+
+void freeQueue(queue_t * queue)
+{
+
+    free(queue->base);
+    free(queue);
+    queue = NULL;
+}
