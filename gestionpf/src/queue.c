@@ -53,7 +53,7 @@ int pushBack(queue_t * queue, T element)
 int popFront(queue_t * queue)
 {
     int success = 1;
-    if(isEmpty(queue))
+    if(isEmptyQueue(queue))
     {
         success = 0;
     }
@@ -76,7 +76,7 @@ int popFront(queue_t * queue)
 T front(queue_t * queue)
 {
     T element;
-    if(isEmpty(queue))
+    if(isEmptyQueue(queue))
     {
         element = 0;
     }
@@ -86,7 +86,7 @@ T front(queue_t * queue)
 T back(queue_t * queue)
 {
     T element;
-    if(isEmpty(queue))
+    if(isEmptyQueue(queue))
     {
         element = 0;
     }
