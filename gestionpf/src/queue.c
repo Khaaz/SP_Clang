@@ -35,7 +35,7 @@ int pushBack(queue_t * queue, T element)
     {
         queue->base[queue->tail] = element;
 
-        if(queue->tail + 1 > queue->capacity)
+        if(queue->tail + 1 == queue->capacity)
         {
             queue->tail = 0;
         }
@@ -92,7 +92,8 @@ int isEmptyQueue(queue_t * queue)
 int isFullQueue(queue_t * queue)
 {
     int full = 0;
-    if(queue->tail == queue->head - 1)
+    if((queue->head == 0 && queue->tail == queue->capacity) ||
+       queue->tail == (queue->head - 1))
     {
         full = 1;
     }
