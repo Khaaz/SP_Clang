@@ -1,6 +1,8 @@
-#include "stack.h"
 #include <stdio.h>
 #include <stdlib.h>
+
+#include "queue.h"
+#include "stack.h"
 
 /*
 void reverseStack(stack_t * stack){
@@ -19,13 +21,25 @@ void reverseStack(stack_t * stack){
 */
 int main()
 {
-    stack_t * stack = create(3);
+    stack_t * stack = createStack(3);
     push(stack, 5);
     push(stack, 5);
     push(stack, 5);
     pop(stack);
     pop(stack);
     pop(stack);
-    display(stack);
+    displayStack(stack);
+    freeStack(stack);
+
+    queue_t * queue = createQueue(5);
+    pushBack(queue, 1);
+    pushBack(queue, 2);
+    pushBack(queue, 3);
+    pushBack(queue, 4);
+    popFront(queue);
+    pushBack(queue, 5);
+    pushBack(queue, 6);
+    popFront(queue);
+
     return 0;
 }
