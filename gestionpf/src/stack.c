@@ -52,7 +52,7 @@ int pop(stack_t * stack)
 T peek(stack_t * stack)
 {
     T t;
-    if(isEmpty(stack))
+    if(isEmptyStack(stack))
     {
         t = 0;
     }

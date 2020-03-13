@@ -3,7 +3,7 @@
 
 #include "queue.h"
 
-queue_t * create(int capacity)
+queue_t * createQueue(int capacity)
 {
     queue_t * queue = malloc(sizeof(*queue));
 
@@ -38,7 +38,7 @@ int pushBack(queue_t * queue, T element)
 
         if(queue->tail + 1 == queue->capacity)
         {
-            queue->tail->0;
+            queue->tail = 0;
         }
         else
         {
@@ -80,7 +80,8 @@ T front(queue_t * queue)
     {
         element = 0;
     }
-    return queue->base[queue->head];
+    element = queue->base[queue->head];
+    return element;
 }
 
 T back(queue_t * queue)
@@ -90,7 +91,8 @@ T back(queue_t * queue)
     {
         element = 0;
     }
-    return queue->base[queue->tail];
+    element =  queue->base[queue->tail];
+    return element;
 }
 
 int isEmptyQueue(queue_t * queue)

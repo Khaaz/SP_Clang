@@ -36,10 +36,13 @@ int main()
     pushBack(queue, 2);
     pushBack(queue, 3);
     pushBack(queue, 4);
+    displayQueue(queue);
     popFront(queue);
     pushBack(queue, 5);
     pushBack(queue, 6);
     popFront(queue);
+    displayQueue(queue);
+    freeQueue(queue);
 
     return 0;
 }
