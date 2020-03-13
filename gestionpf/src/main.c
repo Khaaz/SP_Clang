@@ -4,21 +4,21 @@
 #include "queue.h"
 #include "stack.h"
 
-/*
+
 void reverseStack(stack_t * stack){
     queue_t *queue = createQueue();
-    while (!isEmptyStack)
+    while (!isEmptyStack(stack))
     {
         pushBack(queue, peek(stack_t));
         pop(stack);
     }
-    while (!isEmptyQueue)
+    while (!isEmptyQueue(queue))
     {
         push(stack_t *, front(queue));
         popFront(queue);
     }
 }
-*/
+
 int main()
 {
     stack_t * stack = createStack(3);
