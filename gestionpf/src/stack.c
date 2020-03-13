@@ -21,31 +21,31 @@ void display(stack_t * stack)
 
 int push(stack_t * stack, T t)
 {
-    int error = 1;
+    int success = 1;
     if(stack->top + 1 == stack->capacity)
     {
-        error = 0;
+        success = 0;
     }
     else
     {
         stack->top += 1;
         stack->base[stack->top] = t;
     }
-    return error;
+    return success;
 }
 
 int pop(stack_t * stack)
 {
-    int error = 1;
+    int success = 1;
     if(stack->top == -1)
     {
-        error = 0;
+        success = 0;
     }
     else
     {
         stack->top -= 1;
     }
-    return error;
+    return success;
 }
 
 T peek(stack_t * stack)
@@ -64,12 +64,12 @@ T peek(stack_t * stack)
 
 int isEmpty(stack_t * stack)
 {
-    int error = 0;
+    int success = 0;
     if(stack->top == -1)
     {
-        error = 1;
+        success = 1;
     }
-    return error;
+    return success;
 }
 
 
