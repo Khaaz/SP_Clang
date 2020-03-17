@@ -17,4 +17,4 @@ void AfficheBorrow(borrow_t *);
 void       AddBorrow(tete_t *, int, int);
 borrow_t * initBorrow(int, int);
 tete_t *   initTete();
-borrow_t * removeBorrow(borrow_t *, int);
+void       removeBorrow(tete_t *, int);
