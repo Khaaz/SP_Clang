@@ -26,6 +26,7 @@ void test_lib(){
     printf("On obtient la categorie : %s \n \n", FPOL->name);
     printf("test de la fonction isBookTaken avec le livre N°6 : \n");
     printf("la fonction retourne %d car le livre n'est pas emprunté \n", isBookTaken(book));
+    freeLib(lib);
 }
 
 void test_borrow() {

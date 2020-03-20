@@ -40,6 +40,6 @@ boolean      isBookTaken(book_t *);
 void         displayLib(category_t *);
 void         removeBook(book_t **, int);
 void         removeCategory(category_t **, char *);
-void         freelib(category_t *);
+void         freeLib(category_t *);
 
 #endif

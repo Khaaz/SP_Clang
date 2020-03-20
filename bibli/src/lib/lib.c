@@ -213,6 +213,12 @@ void displayLib(category_t * library)
     }
 }
 
+/**
+ * @brief Supprime un livre d'une liste de livre
+ * 
+ * @param book book_t** - La liste de livre de laquelle on va supprimer le livre
+ * @param number int - Le numero du livre que l'on va supprimer
+ */
 void removeBook(book_t ** book, int number){
     book_t ** prec = book;
     while (*prec != NULL && (*prec)->number != number)
@@ -223,14 +229,19 @@ void removeBook(book_t ** book, int number){
     book_t * tmp = *prec;
     *prec  = (*prec)->next;
     free(tmp);
-
 }
 
-void removeCategory(category_t ** CAT, char * name){
+/**
+ * @brief Supprime une categorie et tous ses livres associe
+ * 
+ * @param category category_t** - La liste des categorie de laquelle supprimer
+ * @param name char* - Le nom de la categorie a supprime
+ */
+void removeCategory(category_t ** category, char * name){
 
-    category_t ** prec = CAT;
+    category_t ** prec = category;
     
-    while (*prec != NULL && strcmp(name,(*prec)->name) == 0)
+    while (*prec != NULL && strcmp(name,(*prec)->name) != 0)
     {
         prec = &((*prec)->next);
     }
@@ -243,11 +254,16 @@ void removeCategory(category_t ** CAT, char * name){
     free(tmp);
 }
 
+/**
+ * @brief Libere la bibliotheque
+ * 
+ * @param lib category_t* - La bibliotheque a liberer
+ */
 void freeLib(category_t * lib){
 
-    while (lib->next != NULL)
+    while (lib != NULL)
     {
-        removeCategory(&(lib->next), lib->next->name);
+        removeCategory(&lib, lib->name);
     }
     free(lib);
 }
