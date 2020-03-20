@@ -27,7 +27,7 @@ category_t * createCategory(char name[3], book_t * books)
 
 book_t * createBook(int number, char title[10])
 {
-    book_t * book = malloc(sizeof(*book));
+    book_t * book = malloc(sizeof(book_t));
     if(book != NULL)
     {
         book->number = number;

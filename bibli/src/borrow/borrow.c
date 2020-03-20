@@ -7,10 +7,16 @@ borrow_t * initBorrow()
 
 borrow_t * createBorrow(int date, int number)
 {
-    borrow_t * borrow = malloc(sizeof(borrow));
-    borrow->date      = date;
-    borrow->number    = number;
-    borrow->next      = NULL;
+    borrow_t * borrow = malloc(sizeof(*borrow));
+    if (borrow != NULL) {
+        borrow->date      = date;
+        borrow->number    = number;
+        borrow->next      = NULL;
+    }
+    else
+    {
+        printf("ERREUR malloc createBorrow");
+    }
     return borrow;
 }
 
