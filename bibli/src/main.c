@@ -87,8 +87,8 @@ int main(int argc, char ** argv)
     removeBorrowFromFile(argv[4], &borrow, lib);
     displayBorrow(borrow);
     
-    printf("==========saveBorrowFromFile==========\n");
-    saveBorrow(argv[2], &borrow, lib);
+    printf("==========saveBorrow==========\n");
+    saveBorrow(argv[2], borrow);
     
     freeBorrow(borrow);
     freeLib(lib);

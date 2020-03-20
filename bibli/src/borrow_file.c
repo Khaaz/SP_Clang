@@ -13,8 +13,35 @@ int loadBorrow(char * path, borrow_t** list, category_t * lib)
     return addBorrowFromFile(path, list, lib);
 }
 
-void saveBorrow()
-{}
+/**
+ * @brief Sauvegarde la liste d'emprunt dans le fichier passe en parametre
+ * 
+ * @param path char* - path - Le chemin d'acces du fichier
+ * @param list borrow_t* - La liste d'emprunt a sauvegarder
+ * @return int 
+ */
+int saveBorrow(char * path, borrow_t* list)
+{
+    borrow_t * borrow    = list;
+
+    int success = 1;
+
+    FILE *     file = fopen(path, "w");
+    if(file != NULL)
+    {
+        while(borrow->next != NULL) {
+            fprintf(file, "%d %d\n", borrow->number, borrow->date);  
+            borrow = borrow->next;
+        }
+        fprintf(file, "%d %d", borrow->number, borrow->date);  
+        
+        fclose(file);
+    } else {
+        printf("[ERREUR: fichier] <saveBorrow>.\n");
+        success = 0;
+    }
+    return success;
+}
 
 /**
  * @brief Ajoute des emprunts depuis un fichier.
@@ -111,6 +138,3 @@ int removeBorrowFromFile(char * path, borrow_t ** borrow, category_t * lib)
 
     return success;
 }
-
-void saveBooks()
-{}
