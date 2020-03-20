@@ -91,6 +91,7 @@ int main(int argc, char ** argv)
     saveBorrow(argv[2], &borrow, lib);
     
     freeBorrow(borrow);
+    freeLib(lib);
 
     return 0;
 }
