@@ -119,9 +119,7 @@ void addBookInLib(category_t * lib, book_t * book, char * categoryName)
     addBookInCategory(category, book);
 }
 
-// TODO remove
-void removeBook()
-{}
+
 
 //
 // find
@@ -213,4 +211,48 @@ void displayLib(category_t * library)
         }
         courLib = courLib->next;
     }
+}
+
+
+
+
+void removeBook(book_t ** book, int number){
+    book_t ** prec = book;
+    while (*prec != NULL && (*prec)->number != number)
+    {
+        prec = &((*prec)->next);
+    }
+
+    book_t * tmp = *prec;
+    *prec  = (*prec)->next;
+    free(tmp);
+
+}
+
+
+
+void removeCategory(category_t ** CAT, char * name){
+
+    category_t ** prec = CAT;
+    
+    while (*prec != NULL && strcmp(name,(*prec)->name) == 0)
+    {
+        prec = &((*prec)->next);
+    }
+    while ((*prec)->books != NULL)
+    {
+        removeBook((*prec)->books);
+    }
+    category_t * tmp = *prec;
+    *prec = (*prec)->next;
+    free(tmp);
+}
+
+void freeLib(category_t * lib){
+
+    while (lib->next != NULL)
+    {
+        removeCategorie(lib->next);
+    }
+    free(lib);
 }

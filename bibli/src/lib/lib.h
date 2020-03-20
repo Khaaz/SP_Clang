@@ -38,5 +38,8 @@ book_t *     findBookInLib(category_t *, int);
 category_t * findCategory(category_t *, char *);
 boolean      isBookTaken(book_t *);
 void         displayLib(category_t *);
+void         removeBook(book_t **, int);
+void         removeCategorie(category_t **, char *);
+void         freelib(category_t *);
 
 #endif
