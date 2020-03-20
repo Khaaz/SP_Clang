@@ -2,8 +2,7 @@
 #include "borrow_file.h"
 #include "lib_file.h"
 
-void test_lib(){
-    
+void testLib(){
     category_t * lib =createLib ();
     book_t * book = createBook(6, "Harry Potter");
     book_t * book2 = createBook(12, "Le grand Bleu"); //insertion en fin
@@ -15,21 +14,21 @@ void test_lib(){
     addBookInCategory(POL, book3);
     addBookInCategory(POL, book4);
     displayLib(lib);
-    printf("\ntest fonction finBook : avec le livre numéro 12 : \n");
+    printf("Test fonction findBook : avec le livre numéro 12 :\n");
     book_t * Fbook = findBook(book, 12);
-    printf("on obtient le livre : %s  : \n\n", Fbook->title);
-    printf("test fonction finBookInlib : avec le livre numéro 5 : \n");
+    printf("On obtient le livre : %s  : \n\n", Fbook->title);
+    printf("Test fonction finBookInlib : avec le livre numéro 5:\n");
     book_t * Fbook2 = findBookInLib(POL, 5);
-    printf("on obtient le livre %s : \n \n", Fbook2->title);
-    printf("On recherche la categorie POL avec la fonction findCategory : \n");
+    printf("On obtient le livre %s : \n \n", Fbook2->title);
+    printf("On recherche la categorie POL avec la fonction findCategory:\n");
     category_t * FPOL = findCategory(POL, "POL");
     printf("On obtient la categorie : %s \n \n", FPOL->name);
-    printf("test de la fonction isBookTaken avec le livre N°6 : \n");
-    printf("la fonction retourne %d car le livre n'est pas emprunté \n", isBookTaken(book));
+    printf("Test de la fonction isBookTaken avec le livre N°6:\n");
+    printf("La fonction retourne %d car le livre n'est pas emprunté.\n", isBookTaken(book));
     freeLib(lib);
 }
 
-void test_borrow() {
+void testBorrow() {
     borrow_t * bow = initBorrow();
     borrow_t * borrow = createBorrow(20201112, 15);
     borrow_t * borrow1 = createBorrow(20221112, 17); //insertion en fin
@@ -93,6 +92,12 @@ int main(int argc, char ** argv)
     
     freeBorrow(borrow);
     freeLib(lib);
+
+    printf("\n\n=========TEST==========\n\n");
+    printf("==========TEST_LIB==========\n");
+    testLib();
+    printf("\n==========TEST_BORROW==========\n");
+    testBorrow();
 
     return 0;
 }
