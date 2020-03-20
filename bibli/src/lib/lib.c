@@ -46,7 +46,7 @@ category_t * createCategory(char name[3], book_t * books)
  */
 book_t * createBook(int number, char title[10])
 {
-    book_t * book = malloc(sizeof(book_t));
+    book_t * book = malloc(sizeof(*book));
     if(book != NULL)
     {
         book->number = number;
@@ -202,7 +202,7 @@ void displayLib(category_t * library)
     
     while(courLib != NULL)
     {
-        printf("\nCategorie: %s\n", courLib->name);
+        printf("Categorie: %s\n", courLib->name);
         courBook = courLib->books;
         while(courBook != NULL)
         {

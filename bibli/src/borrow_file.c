@@ -69,7 +69,6 @@ int addBorrowFromFile(char * path, borrow_t ** borrow, category_t * lib)
     return success;
 }
 
-// TODO: devrait remettre livre a isTaken = false
 /**
  * @brief Supprime des emprunts depuis un fichier.
  * 
@@ -80,16 +79,27 @@ int addBorrowFromFile(char * path, borrow_t ** borrow, category_t * lib)
  */
 int removeBorrowFromFile(char * path, borrow_t ** borrow, category_t * lib)
 {
+    book_t *   book = NULL;
+
     int    success = 1;
     int    number = 0;
+
     FILE * file = fopen(path, "r");
     if(file != NULL)
     {
         while(!feof(file))
         {
             fscanf(file, "%d", &number);
-            printf("\n numero a supprime : %d", number);
-            removeBorrow(borrow, number);
+
+            book = findBookInLib(lib, number);
+            if (book != NULL) {
+                printf("Numero a supprime: %d\n", number);
+                removeBorrow(borrow, number);
+                book->isTaken = false;
+            } else {
+                printf("Le livre N:%d n'existe pas.\n", number);
+            }
+            
         }
         fclose(file);
     }

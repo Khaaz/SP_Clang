@@ -84,7 +84,7 @@ int main(int argc, char ** argv)
     displayBorrow(borrow);
 
     printf("==========removeBorrowFromFile==========\n");
-    //removeBorrowFromFile(argv[4], &borrow, lib);
+    removeBorrowFromFile(argv[4], &borrow, lib);
     displayBorrow(borrow);
     
     printf("==========saveBorrowFromFile==========\n");
@@ -93,7 +93,7 @@ int main(int argc, char ** argv)
     freeBorrow(borrow);
     freeLib(lib);
 
-    printf("\n\n=========TEST==========\n\n");
+    printf("\n\n=========TEST==========\n");
     printf("==========TEST_LIB==========\n");
     testLib();
     printf("\n==========TEST_BORROW==========\n");
