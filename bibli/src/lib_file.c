@@ -1,20 +1,24 @@
 #include "lib_file.h"
 
-category_t * loadLib(char * path)
+/**
+ * @brief Charge la biblotheque dans la structure depuis un fichier
+ * 
+ * @param path char* - Le chemin d'acces au fichier
+ * @param lib category_t** - La structure ou charger la bibliotheque
+ * @return int - Si la fonction a et execute avec succes ou pas
+ */
+int loadLib(char * path, category_t** lib)
 {
-
-    category_t * lib = createLib();
-
-    category_t *  category;
-    category_t ** categoryPrev = &lib;
-    book_t *      book;
-    book_t **     bookPrev;
-
+    category_t ** categoryPrev = lib;
+    category_t *  category = NULL;
+    book_t **     bookPrev = NULL;
+    book_t *      book = NULL;
+    
+    int success = 1;
     char categoryName[4];
     char title[11];
     int  nbrLivres = 0;
     int  number    = 0;
-    int  i;
 
     FILE * file = fopen(path, "r");
     if(file != NULL)
@@ -28,7 +32,7 @@ category_t * loadLib(char * path)
 
             bookPrev = &(category->books);
 
-            for(i = 0; i < nbrLivres; i++)
+            for(int i = 0; i < nbrLivres; i++)
             {
                 fscanf(file, "%d", &number);
                 fgets(title, 12, file);
@@ -46,8 +50,9 @@ category_t * loadLib(char * path)
     else
     {
 
-        printf("Erreur ouverture fichier.");
+        printf("[ERREUR: fichier] <loadLib>.\n");
+        success = 0;
     }
 
-    return lib;
+    return success;
 }

@@ -7,16 +7,19 @@
 
 int main(int argc, char ** argv)
 {
-    category_t * lib = loadLib(argv[1]);
+    category_t *lib = createLib();
+    loadLib(argv[1], &lib);
 
-    // displayLib(library);
+    displayLib(lib);
 
-    borrow_t * borrow = loadBorrow("test");
+    borrow_t * borrow = initBorrow();
+    loadBorrow("test", &borrow);
     displayBorrow(borrow);
-    addBorrowFromFile(argv[2], borrow, lib);
+
+    addBorrowFromFile(argv[2], &borrow, lib);
     displayBorrow(borrow);
     freeBorrow(borrow);
-    //removeBorrowFromFile(argv[3], borrow, lib);
+    //removeBorrowFromFile(argv[3], &borrow, lib);
 
     // borrow_t * list = initBorrow();
     // borrow_t * borrow = createBorrow(20201111, 15);
