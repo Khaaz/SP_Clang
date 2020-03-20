@@ -6,7 +6,7 @@ EXEC=prog
 BUILD_DIR ?= ./build
 SRC_DIR ?= ./src
 
-SRCS=$(wildcard $(SRC_DIR)/*.c)
+SRCS=$(shell find $(SRC_DIR) -name "*.c")
 OBJS := $(SRCS:%=$(BUILD_DIR)/%.o)
 
 $(BUILD_DIR)/$(EXEC): $(OBJS)
