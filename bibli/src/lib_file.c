@@ -2,19 +2,19 @@
 
 /**
  * @brief Charge la biblotheque dans la structure depuis un fichier
- * 
+ *
  * @param path char* - Le chemin d'acces au fichier
  * @param lib category_t** - La structure ou charger la bibliotheque
  * @return int - Si la fonction a et execute avec succes ou pas
  */
-int loadLib(char * path, category_t** lib)
+int loadLib(char * path, category_t ** lib)
 {
     category_t ** categoryPrev = lib;
-    category_t *  category = NULL;
-    book_t **     bookPrev = NULL;
-    book_t *      book = NULL;
-    
-    int success = 1;
+    category_t *  category     = NULL;
+    book_t **     bookPrev     = NULL;
+    book_t *      book         = NULL;
+
+    int  success = 1;
     char categoryName[4];
     char title[11];
     int  nbrLivres = 0;

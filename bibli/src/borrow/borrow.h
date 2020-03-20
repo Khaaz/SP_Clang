@@ -9,8 +9,8 @@
 typedef struct borrow
 {
     int             number; // Le numero de l'emprunt
-    int             date; // La date de l'emprunt
-    struct borrow * next; // L'emprunt suivant
+    int             date;   // La date de l'emprunt
+    struct borrow * next;   // L'emprunt suivant
 } borrow_t;
 
 borrow_t * initBorrow();
