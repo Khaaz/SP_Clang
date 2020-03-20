@@ -91,41 +91,19 @@ void addNextBook(book_t ** prev, book_t * toAdd)
 
 // TODO: refaire ca
 /**
- * @brief Ajoute un livre dans une categorie. Trouve l'endroit ou ajouter le livre (liste triee)
+ * @brief Ajoute un livre dans une categorie. Trouve l'endroit ou ajouter le livre (liste triee en fonction des numero de livres)
  * 
  * @param category category_t* - La categorie dans laquelle on ajoute le livre
  * @param book category_t* - Le livre a ajouter
  */
 void addBookInCategory(category_t * category, book_t * book)
 {
-    if(category->books == NULL)
-    {
-        category->books = book;
-        book->next      = NULL;
+    book_t ** prev = &(category->books);
+    while(prev != NULL && ((*prev)->number) <= book->number) {
+
+        prev = &((*prev)->next);
     }
-    else if(category->books->number > book->number)
-    {
-        book->next      = category->books;
-        category->books = book;
-    }
-    else
-    {
-        book_t * prec = category->books;
-        while(prec->next != NULL && (prec->next->number <= book->number))
-        {
-            prec = prec->next;
-        }
-        if(prec->next == NULL)
-        {
-            book->next = NULL;
-            prec->next = book;
-        }
-        else
-        {
-            book->next = prec->next;
-            prec->next = book;
-        }
-    }
+    addNextBook(prev, book);
 }
 
 /**
