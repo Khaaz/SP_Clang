@@ -4,7 +4,7 @@
 #include "../main.h"
 
 /**
- * @brief Structure Borrow. Liste chaine d'emprunt.
+ * @brief Structure Borrow. Liste chaine d'emprunt triee par date.
  */
 typedef struct borrow
 {

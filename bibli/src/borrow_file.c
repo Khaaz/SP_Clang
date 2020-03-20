@@ -1,55 +1,16 @@
 #include "borrow_file.h"
 
 /**
- * @brief 
+ * @brief Charge tous les emprunts depuis un ficher
  * 
- * @param path 
- * @param list 
+ * @param path char* - Le chemin d'acces de ce fichier
+ * @param list borrow_t** - La liste des emprunts ou serong charger les emprunts
+ * @param lib category_t* - La bibliotheque
  * @return int - Si la fonction a et execute avec succes ou pas
  */
-int loadBorrow(char * path, borrow_t** list)
+int loadBorrow(char * path, borrow_t** list, category_t * lib)
 {
-    book_t *   book = NULL;
-    borrow_t * b    = NULL;
-
-    int success = 1;
-    int number  = 0;
-    int date    = 0;
-    
-    FILE *     file = fopen(path, "r");
-    if(file != NULL)
-    {
-        while(!feof(file))
-        {
-            fscanf(file, "%d %d", &number, &date);
-            book = findBookInLib(lib, number);
-
-            if(book != NULL)
-            {
-                if(!isBookTaken(book))
-                {
-                    b = createBorrow(date, number);
-                    addBorrow(&borrow, b);
-                    book->isTaken = true;
-                }
-                else
-                {
-                    printf("le livre N %d est deja emprunte\n", number);
-                }
-            }
-            else
-            {
-                printf("le livre N %d n'existe pas:  \n", number);
-            }
-        }
-        fclose(file);
-    }
-    else
-    {
-        printf("[ERREUR: fichier] <loadBorrow>.\n");
-        success = 0;
-    }
-    return success;
+    return addBorrowFromFile(path, list, lib);
 }
 
 void saveBorrow()

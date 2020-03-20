@@ -4,7 +4,7 @@
 #include "./borrow/borrow.h"
 #include "lib/lib.h"
 
-int loadBorrow(char *, borrow_t**);
+int        loadBorrow(char *, borrow_t**, category_t *);
 void       saveBorrow();
 int        addBorrowFromFile(char *, borrow_t **, category_t *);
 int        removeBorrowFromFile(char *, borrow_t **, category_t *);

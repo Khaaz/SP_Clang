@@ -2,8 +2,6 @@
 #include "borrow_file.h"
 #include "lib_file.h"
 
-#include "borrow/borrow.h"
-#include "lib/lib.h"
 void test_lib(){
     
     category_t * lib =createLib ();
@@ -28,15 +26,14 @@ void test_lib(){
     printf("On obtient la categorie : %s \n \n", FPOL->name);
     printf("test de la fonction isBookTaken avec le livre N°6 : \n");
     printf("la fonction retourne %d car le livre n'est pas emprunté \n", isBookTaken(book));
-
 }
 
 void test_borrow() {
-     borrow_t * bow = initBorrow();
+    borrow_t * bow = initBorrow();
     borrow_t * borrow = createBorrow(20201112, 15);
     borrow_t * borrow1 = createBorrow(20221112, 17); //insertion en fin
     borrow_t * borrow2 = createBorrow(20211112, 16); //insertion  au milieu
-    borrow_t * borrow3 = createBorrow(20191112, 14);    //insertion au début
+    borrow_t * borrow3 = createBorrow(20191112, 14); //insertion au début
     addBorrow(&bow, borrow);
     addBorrow(&bow, borrow1);
     addBorrow(&bow, borrow2);
@@ -47,25 +44,53 @@ void test_borrow() {
     removeBorrow(&bow,15);
     displayBorrow(bow);
     freeBorrow(bow);
-
-
-
 }
 
+/**
+ * @brief Main.
+ * S'appelle avec 3 arguments:
+ * 1 - Le chemin pour le fichier de lib (data/lib.txt)
+ * 2 - Le chemin pour le fichier de borrow (data/borrow.txt)
+ * 3 - Le chemin pour le fichier de add_borrow (data/add_borrow.txt)
+ * 4 - Le chemin pour le fichier de remove_borrow (data/remove_borrow.txt)
+ * 
+ * Dans le repertoire courant (root)
+ * `make clean && make`
+ * `./build/prog ./data/lib.txt ./data/borrow.txt ./data/add_borrow.txt ./data/remove_borrow.txt`
+ * 
+ * @param argc int - Le nombre d'argument
+ * @param argv char** - Les arguments
+ * @return int 
+ */
 int main(int argc, char ** argv)
 {
+    if (argc < 5) {
+        printf("Nombre d'argument non suffisant: 4 minimum.\n");
+        exit(1);
+    }
+
+    printf("==========loadLib==========\n"); // Load library depuis le fichier
     category_t *lib = createLib();
     loadLib(argv[1], &lib);
-
     displayLib(lib);
 
+    printf("==========loadBorrow==========\n"); // Load les emprunts depuis le fichier
     borrow_t * borrow = initBorrow();
-    loadBorrow("test", &borrow);
+    loadBorrow(argv[2], &borrow, lib);
     displayBorrow(borrow);
 
-    addBorrowFromFile(argv[2], &borrow, lib);
+    printf("==========addBorrowFromFile==========\n");
+    addBorrowFromFile(argv[3], &borrow, lib);
     displayBorrow(borrow);
+
+    printf("==========removeBorrowFromFile==========\n");
+    //removeBorrowFromFile(argv[4], &borrow, lib);
+    displayBorrow(borrow);
+    
+    printf("==========saveBorrowFromFile==========\n");
+    saveBorrow(argv[2], &borrow, lib);
+    
     freeBorrow(borrow);
-    //removeBorrowFromFile(argv[3], &borrow, lib);
+
     return 0;
 }
