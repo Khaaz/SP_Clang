@@ -241,7 +241,7 @@ void removeCategory(category_t ** CAT, char * name){
     }
     while ((*prec)->books != NULL)
     {
-        removeBook((*prec)->books);
+        removeBook(&((*prec)->books),(*prec)->books->number);
     }
     category_t * tmp = *prec;
     *prec = (*prec)->next;
@@ -252,7 +252,7 @@ void freeLib(category_t * lib){
 
     while (lib->next != NULL)
     {
-        removeCategorie(lib->next);
+        removeCategorie(&(lib->next), lib->next->name);
     }
     free(lib);
 }
