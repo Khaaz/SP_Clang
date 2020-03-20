@@ -6,7 +6,7 @@
 #define MAIN_H
 
 typedef enum
-{ 
+{
     false,
     true
 } boolean;

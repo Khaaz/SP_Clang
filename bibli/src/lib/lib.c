@@ -1,33 +1,42 @@
 #include "lib.h"
- 
+
 //
 // CREATE
 //
 
-category_t * createLib() {
+category_t * createLib()
+{
     return NULL;
 }
 
-category_t * createCategory(char name[3], book_t * books) {
+category_t * createCategory(char name[3], book_t * books)
+{
     category_t * cat = malloc(sizeof(*cat));
-    if (cat != NULL) {
-    strcpy(cat->name, name);
-    cat->next  = NULL;
-    cat->books = books;
-    } else {
+    if(cat != NULL)
+    {
+        strcpy(cat->name, name);
+        cat->next  = NULL;
+        cat->books = books;
+    }
+    else
+    {
         printf("ERREUR malloc createCategory");
     }
     return cat;
 }
 
-book_t * createBook(int number, char title[10]) {
+book_t * createBook(int number, char title[10])
+{
     book_t * book = malloc(sizeof(*book));
-    if (book != NULL) {
-    book->number   = number;
-    strcpy(book->title, title);
-    book->next    = NULL;
-    book->isTaken = false;
-    } else {
+    if(book != NULL)
+    {
+        book->number = number;
+        strcpy(book->title, title);
+        book->next    = NULL;
+        book->isTaken = false;
+    }
+    else
+    {
         printf("ERREUR malloc createBook");
     }
     return book;
@@ -37,26 +46,29 @@ book_t * createBook(int number, char title[10]) {
 // ADD
 //
 
-void addNextCategory(category_t **prev, category_t *toAdd) {
+void addNextCategory(category_t ** prev, category_t * toAdd)
+{
     toAdd->next = *prev;
-    *prev = toAdd;
+    *prev       = toAdd;
 }
 
-void addNextBook(book_t **prev, book_t *toAdd ) {
+void addNextBook(book_t ** prev, book_t * toAdd)
+{
     toAdd->next = *prev;
-    *prev = toAdd;
+    *prev       = toAdd;
 }
 
 // TODO: refaire ca
-void addBookInCategory(category_t *category, book_t *book) {
+void addBookInCategory(category_t * category, book_t * book)
+{
     if(category->books == NULL)
     {
         category->books = book;
-        book->next = NULL;
+        book->next      = NULL;
     }
     else if(category->books->number > book->number)
     {
-        book->next = category->books;
+        book->next      = category->books;
         category->books = book;
     }
     else
@@ -79,23 +91,22 @@ void addBookInCategory(category_t *category, book_t *book) {
     }
 }
 
-void addBookInLib(category_t *lib, book_t *book, char* categoryName) {
+void addBookInLib(category_t * lib, book_t * book, char * categoryName)
+{
     category_t * category = findCategory(lib, categoryName);
     addBookInCategory(category, book);
 }
 
-
 // TODO remove
-void removeBook() {
-
-}
-
+void removeBook()
+{}
 
 //
 // find
 //
 
-book_t * findBook(book_t * book, int bookNumber) {
+book_t * findBook(book_t * book, int bookNumber)
+{
     book_t * cour = book;
     while(cour != NULL && cour->number != bookNumber)
     {
@@ -104,28 +115,31 @@ book_t * findBook(book_t * book, int bookNumber) {
     return cour;
 }
 
-book_t * findBookInLib(category_t * lib, int bookNumber) {
-    category_t * cour = lib;
-    book_t *result = NULL;
+book_t * findBookInLib(category_t * lib, int bookNumber)
+{
+    category_t * cour   = lib;
+    book_t *     result = NULL;
     while(cour != NULL && result == NULL)
     {
         result = findBook(cour->books, bookNumber);
-        cour = cour->next;
+        cour   = cour->next;
     }
     return result;
 }
 
-category_t * findCategory(category_t * lib, char* categoryName) {
+category_t * findCategory(category_t * lib, char * categoryName)
+{
     category_t * cour = lib;
 
-    while(cour != NULL && (strcmp(cour->name,categoryName) != 0) )
+    while(cour != NULL && (strcmp(cour->name, categoryName) != 0))
     {
         cour = cour->next;
     }
     return cour;
 }
 
-boolean isBookTaken(book_t *book) {
+boolean isBookTaken(book_t * book)
+{
     return book->isTaken;
 }
 

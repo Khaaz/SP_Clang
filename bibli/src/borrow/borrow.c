@@ -1,10 +1,12 @@
 #include "borrow.h"
 
-borrow_t * initBorrow() {
+borrow_t * initBorrow()
+{
     return NULL;
 }
 
-borrow_t * createBorrow(int date, int number) {
+borrow_t * createBorrow(int date, int number)
+{
     borrow_t * borrow = malloc(sizeof(borrow));
     borrow->date      = date;
     borrow->number    = number;
@@ -12,13 +14,15 @@ borrow_t * createBorrow(int date, int number) {
     return borrow;
 }
 
-void addNextBorrow(borrow_t **prev, borrow_t *borrow) {
+void addNextBorrow(borrow_t ** prev, borrow_t * borrow)
+{
     borrow->next = *prev;
-    *prev = borrow;
+    *prev        = borrow;
 }
 
-void addBorrow(borrow_t **list, borrow_t * borrow) {
-    borrow_t ** prec   = list;
+void addBorrow(borrow_t ** list, borrow_t * borrow)
+{
+    borrow_t ** prec = list;
 
     while(*prec != NULL && (*prec)->date < borrow->date)
     {
@@ -27,7 +31,8 @@ void addBorrow(borrow_t **list, borrow_t * borrow) {
     addNextBorrow(prec, borrow);
 }
 
-void removeBorrow(borrow_t **list, int number) {
+void removeBorrow(borrow_t ** list, int number)
+{
 
     borrow_t ** prec = list;
     while(*prec != NULL && (*prec)->number != number)
@@ -36,7 +41,7 @@ void removeBorrow(borrow_t **list, int number) {
     }
 
     borrow_t * tmp = *prec;
-    *prec = (*prec)->next;
+    *prec          = (*prec)->next;
     free(tmp);
 }
 
@@ -58,4 +63,3 @@ void freeBorrow(borrow_t * list)
         removeBorrow(&list, list->number);
     }
 }
-

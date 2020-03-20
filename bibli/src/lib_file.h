@@ -3,5 +3,6 @@
 
 #include "./lib/lib.h"
 
-category_t * loadLib(char*);
+category_t * loadLib(char *);
+
 #endif

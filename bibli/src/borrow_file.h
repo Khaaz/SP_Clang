@@ -5,14 +5,9 @@
 #include "lib/lib.h"
 
 borrow_t * loadBorrow(char *);
-
-void saveBorrow();
-
-int addBorrowFromFile(char*, borrow_t *, category_t *);
-
-
-int removeBorrowFromFile(char* , borrow_t * , category_t * );
-
-void saveBooks();
+void       saveBorrow();
+int        addBorrowFromFile(char *, borrow_t *, category_t *);
+int        removeBorrowFromFile(char *, borrow_t *, category_t *);
+void       saveBooks();
 
 #endif

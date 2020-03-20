@@ -2,15 +2,15 @@
 #include "borrow_file.h"
 #include "lib_file.h"
 
-#include "lib/lib.h"
 #include "borrow/borrow.h"
+#include "lib/lib.h"
 
 int main(int argc, char ** argv)
-{ 
+{
     category_t * lib = loadLib(argv[1]);
 
-    //displayLib(library);
-    
+    // displayLib(library);
+
     borrow_t * borrow = loadBorrow("test");
     displayBorrow(borrow);
     addBorrowFromFile(argv[2], borrow, lib);
@@ -21,7 +21,7 @@ int main(int argc, char ** argv)
     // borrow_t * borrow = createBorrow(20201111, 15);
 
     // addBorrow(&list, borrow);
-    
+
     // borrow_t * borrow2 = createBorrow(20191111, 13);
     // addBorrow(&list, borrow2);
 
@@ -29,12 +29,11 @@ int main(int argc, char ** argv)
     // addBorrow(&list, borrow3);
     // borrow_t * borrow4 = createBorrow(20151111, 23);
     // addBorrow(&list, borrow4);
-  
+
     // removeBorrow(&list, 20);
 
     // displayBorrow(list);
     // printf("ok");
-
 
     // init bibli from file (file via argv)
     // init borrow from file
@@ -43,7 +42,6 @@ int main(int argc, char ** argv)
     // add borrow from file
     // save borrow in file
     // save book return date < date given
-
 
     /*
         book_t *livre = CreateBook(1, "Harie Pôteure");

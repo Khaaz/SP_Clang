@@ -1,21 +1,22 @@
 #include "lib_file.h"
 
-category_t * loadLib(char * path) {
-    
-    category_t * lib = createLib();
-    
-    category_t * category;
-    category_t **categoryPrev = &lib;
-    book_t * book;
-    book_t ** bookPrev;
+category_t * loadLib(char * path)
+{
 
-    char           categoryName[4];
-    char           title[11];
-    int            nbrLivres = 0;
-    int            number    = 0;
-    int            i;
-    
-    FILE *         file = fopen(path, "r");
+    category_t * lib = createLib();
+
+    category_t *  category;
+    category_t ** categoryPrev = &lib;
+    book_t *      book;
+    book_t **     bookPrev;
+
+    char categoryName[4];
+    char title[11];
+    int  nbrLivres = 0;
+    int  number    = 0;
+    int  i;
+
+    FILE * file = fopen(path, "r");
     if(file != NULL)
     {
 
@@ -24,9 +25,9 @@ category_t * loadLib(char * path) {
             fscanf(file, "%s %d", categoryName, &nbrLivres);
             category = createCategory(categoryName, NULL);
             addNextCategory(categoryPrev, category);
-            
+
             bookPrev = &(category->books);
-            
+
             for(i = 0; i < nbrLivres; i++)
             {
                 fscanf(file, "%d", &number);
