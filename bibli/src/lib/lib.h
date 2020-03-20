@@ -4,7 +4,7 @@
 #include "../main.h"
 
 /**
- * @brief Structure Book. List chainee de livre.
+ * @brief Structure Book. List chainee de livre triee en fonction des numero de livre.
  * 
  */
 typedef struct book
