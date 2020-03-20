@@ -3,11 +3,14 @@
 
 #include "../main.h"
 
+/**
+ * @brief Structure Borrow. Liste chaine d'emprunt.
+ */
 typedef struct borrow
 {
-    int             number;
-    int             date;
-    struct borrow * next;
+    int             number; // Le numero de l'emprunt
+    int             date; // La date de l'emprunt
+    struct borrow * next; // L'emprunt suivant
 } borrow_t;
 
 borrow_t * initBorrow();
