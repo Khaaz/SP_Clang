@@ -3,19 +3,27 @@
 
 #include "../main.h"
 
+/**
+ * @brief Structure Book. List chainee de livre.
+ * 
+ */
 typedef struct book
 {
-    int           number;
-    char          title[10];
-    boolean       isTaken;
-    struct book * next;
+    int           number; // Le numero du livre
+    char          title[10]; // Le titre du livre
+    boolean       isTaken; // Si le livre est emprunte ou pas
+    struct book * next; // Le livre suivant
 } book_t;
 
+/**
+ * @brief Structure Category. Liste chainee de categorie.
+ * 
+ */
 typedef struct category
 {
-    char              name[3];
-    book_t *          books;
-    struct category * next;
+    char              name[3]; // Le nom de la categorie
+    book_t *          books; // La liste de livre de cette categorie
+    struct category * next; // La categorie suivante
 } category_t;
 
 category_t * createLib();

@@ -4,11 +4,23 @@
 // CREATE
 //
 
+/**
+ * @brief Creer une bibliotheque
+ * 
+ * @return category_t* 
+ */
 category_t * createLib()
 {
     return NULL;
 }
 
+/**
+ * @brief Creer une categorie
+ * 
+ * @param name char[3] - Le nom de la categorie
+ * @param books book_t* - La liste des livres pour cette categorie (peut etre NULL)
+ * @return category_t* 
+ */
 category_t * createCategory(char name[3], book_t * books)
 {
     category_t * cat = malloc(sizeof(*cat));
@@ -20,11 +32,18 @@ category_t * createCategory(char name[3], book_t * books)
     }
     else
     {
-        printf("ERREUR malloc createCategory");
+        printf("[ERREUR: malloc] <createCategory>.\n");
     }
     return cat;
 }
 
+/**
+ * @brief Creer un livre
+ * 
+ * @param number int - Le numero du livre
+ * @param title char[10] - Le titre du livre
+ * @return book_t* 
+ */
 book_t * createBook(int number, char title[10])
 {
     book_t * book = malloc(sizeof(book_t));
@@ -37,7 +56,7 @@ book_t * createBook(int number, char title[10])
     }
     else
     {
-        printf("ERREUR malloc createBook");
+        printf("[ERREUR: malloc] <createBook>.\n");
     }
     return book;
 }
@@ -46,12 +65,24 @@ book_t * createBook(int number, char title[10])
 // ADD
 //
 
+/**
+ * @brief Ajoute une categorie a la suite d'une categorie
+ * 
+ * @param prev category_t** - La categorie precedente
+ * @param toAdd category_t* - La categorie a ajouter
+ */
 void addNextCategory(category_t ** prev, category_t * toAdd)
 {
     toAdd->next = *prev;
     *prev       = toAdd;
 }
 
+/**
+ * @brief Ajoute un livre a la suite d'un livre
+ * 
+ * @param prev book_t** - Le livre precedent
+ * @param toAdd book_t* - Le livre a ajouter
+ */
 void addNextBook(book_t ** prev, book_t * toAdd)
 {
     toAdd->next = *prev;
@@ -59,6 +90,12 @@ void addNextBook(book_t ** prev, book_t * toAdd)
 }
 
 // TODO: refaire ca
+/**
+ * @brief Ajoute un livre dans une categorie. Trouve l'endroit ou ajouter le livre (liste triee)
+ * 
+ * @param category category_t* - La categorie dans laquelle on ajoute le livre
+ * @param book category_t* - Le livre a ajouter
+ */
 void addBookInCategory(category_t * category, book_t * book)
 {
     if(category->books == NULL)
@@ -91,6 +128,13 @@ void addBookInCategory(category_t * category, book_t * book)
     }
 }
 
+/**
+ * @brief Ajoute un libre dans la bibliotheque via le nom de la categorie dans laquelle l'ajouter
+ * 
+ * @param lib category_t* - La bibliotheque
+ * @param book book_t* - Le livre a ajouter
+ * @param categoryName char* - Le nom de la categorie dans laquelle on ajouter le livre
+ */
 void addBookInLib(category_t * lib, book_t * book, char * categoryName)
 {
     category_t * category = findCategory(lib, categoryName);
@@ -105,6 +149,13 @@ void removeBook()
 // find
 //
 
+/**
+ * @brief Trouve un livre dans une liste de livre. Renvoie NULL si le livre n'existe pas
+ * 
+ * @param book book_t* - La liste de livre ou chercher
+ * @param bookNumber int - Le numero du livre a chercher
+ * @return book_t* 
+ */
 book_t * findBook(book_t * book, int bookNumber)
 {
     book_t * cour = book;
@@ -115,6 +166,13 @@ book_t * findBook(book_t * book, int bookNumber)
     return cour;
 }
 
+/**
+ * @brief Trouve un livre dans la bibliotheque. Cherche dans toutes les categories. Renvoie NULL si le livre n'existe pas
+ * 
+ * @param lib category_t* - La bibliotheque
+ * @param bookNumber int - Le numero du livre
+ * @return book_t* 
+ */
 book_t * findBookInLib(category_t * lib, int bookNumber)
 {
     category_t * cour   = lib;
@@ -127,6 +185,13 @@ book_t * findBookInLib(category_t * lib, int bookNumber)
     return result;
 }
 
+/**
+ * @brief Trouve une categorie avec son nom. Renvoie NULL si la categorie n'existe pas
+ * 
+ * @param lib category_t* - La bibliotheque
+ * @param categoryName char* - Le nom de la categorie a trouver
+ * @return category_t* 
+ */
 category_t * findCategory(category_t * lib, char * categoryName)
 {
     category_t * cour = lib;
@@ -138,23 +203,36 @@ category_t * findCategory(category_t * lib, char * categoryName)
     return cour;
 }
 
+/**
+ * @brief Si un livre est emprunte ou pas
+ * 
+ * @param book book_t* - Le livre qu'on veut tester
+ * @return boolean 
+ */
 boolean isBookTaken(book_t * book)
 {
     return book->isTaken;
 }
 
+/**
+ * @brief Affiche la bibliotheque
+ * 
+ * @param library category_t* - La bibliotheque 
+ */
 void displayLib(category_t * library)
 {
-    category_t * cour1 = library;
-    while(cour1 != NULL)
+    category_t * courLib = library;
+    book_t * courBook = NULL;
+    
+    while(courLib != NULL)
     {
-        printf(" \n Categorie : %s : ", cour1->name);
-        book_t * cour2 = cour1->books;
-        while(cour2 != NULL)
+        printf("\nCategorie: %s\n", courLib->name);
+        courBook = courLib->books;
+        while(courBook != NULL)
         {
-            printf(" \n livre N %d : %s", cour2->number, cour2->title);
-            cour2 = cour2->next;
+            printf("Livre num %d : %s\n", courBook->number, courBook->title);
+            courBook = courBook->next;
         }
-        cour1 = cour1->next;
+        courLib = courLib->next;
     }
 }

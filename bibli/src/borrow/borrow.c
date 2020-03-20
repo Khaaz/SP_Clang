@@ -27,7 +27,7 @@ borrow_t * createBorrow(int date, int number)
     }
     else
     {
-        printf("[ERREUR: malloc] <createBorrow>.");
+        printf("[ERREUR: malloc] <createBorrow>.\n");
     }
     return borrow;
 }
