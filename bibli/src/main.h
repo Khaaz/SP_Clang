@@ -5,6 +5,11 @@
 #ifndef MAIN_H
 #define MAIN_H
 
+/**
+ * @brief Type boolean.
+ * true: 0
+ * false: 1
+ */
 typedef enum
 {
     false,
