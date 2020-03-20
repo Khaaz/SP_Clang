@@ -16,5 +16,6 @@ void       addNextBorrow(borrow_t **, borrow_t *);
 void       addBorrow(borrow_t **, borrow_t *);
 void       removeBorrow(borrow_t **, int);
 void       displayBorrow(borrow_t *);
+void       freeBorrow(borrow_t *);
 
 #endif

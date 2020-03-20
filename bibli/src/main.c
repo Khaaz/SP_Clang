@@ -15,6 +15,7 @@ int main(int argc, char ** argv)
     displayBorrow(borrow);
     addBorrowFromFile(argv[2], borrow, lib);
     displayBorrow(borrow);
+    freeBorrow(borrow);
     //removeBorrowFromFile(argv[3], borrow, lib);
 
     // borrow_t * list = initBorrow();
