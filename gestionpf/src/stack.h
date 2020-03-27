@@ -2,13 +2,14 @@ typedef int T;
 
 /**
  * @brief Structure Stack. La pile
- * 
+ *
  */
 typedef struct stack
 {
-    int capacity; // La capacite maximum de cette pile (nombre d'elements maximum dans cette pile)
-    int top; // L'index de l'element du dessus de la pile 
-    T * base; // Le tableau d'elements de la pile
+    int capacity; // La capacite maximum de cette pile (nombre d'elements
+                  // maximum dans cette pile)
+    int top;      // L'index de l'element du dessus de la pile
+    T * base;     // Le tableau d'elements de la pile
 } stack_t;
 
 stack_t * createStack(int);

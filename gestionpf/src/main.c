@@ -23,7 +23,6 @@ void reverseStack(stack_t * stack)
 int ackerman(int m, int n)
 {
 
-
     int       mi     = m;
     int       ni     = n;
     stack_t * pile   = createStack(10);
@@ -59,48 +58,51 @@ int ackerman(int m, int n)
     return ni;
 }
 
-void testStack(){
+void testStack()
+{
     stack_t * stack = createStack(4);
     push(stack, 1);
     push(stack, 2);
     push(stack, 3);
     push(stack, 4);
-    
+
     displayStack(stack);
-    
+
     pop(stack);
     printf("Dernier element de la pile apres un pop : %d\n", peek(stack));
-    
+
     freeStack(stack);
 }
 
-void testQueue(){
+void testQueue()
+{
     queue_t * queue = createQueue(4);
     pushBack(queue, 1);
     pushBack(queue, 2);
     pushBack(queue, 3);
     pushBack(queue, 4);
-    
+
     displayQueue(queue);
-    
+
     popFront(queue);
     printf("Premier element de la file  apres un pop : %d\n", front(queue));
-    
+
     freeQueue(queue);
 }
 
-void testReverse() {
+void testReverse()
+{
     stack_t * stack = createStack(4);
     push(stack, 1);
     push(stack, 2);
     push(stack, 3);
     push(stack, 4);
-    
+
     printf("Avant reverse:\n");
     displayStack(stack);
-    
+
     reverseStack(stack);
-    
+
     printf("Apres reverse:\n");
     displayStack(stack);
 
@@ -109,7 +111,7 @@ void testReverse() {
 
 int main()
 {
-    
+
     printf("TEST - Stack:\n");
     testStack();
     printf("TEST - Queue:\n");
@@ -117,8 +119,8 @@ int main()
 
     printf("TEST - Reverse:\n");
     testReverse();
-    
-    printf("TEST - Ackermann(2,2) : %d\n", ackerman(2,2));
+
+    printf("TEST - Ackermann(2,2) : %d\n", ackerman(2, 2));
 
     return 0;
 }

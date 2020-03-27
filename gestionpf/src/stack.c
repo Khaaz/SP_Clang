@@ -5,9 +5,9 @@
 
 /**
  * @brief Creer un Stack (Pile)
- * 
+ *
  * @param capacity - La taille maximum de cette pile
- * @return stack_t* 
+ * @return stack_t*
  */
 stack_t * createStack(int capacity)
 {
@@ -20,7 +20,7 @@ stack_t * createStack(int capacity)
 
 /**
  * @brief Affiche le contenue de la pile
- * 
+ *
  * @param stack stack_t* - La pile a afficher
  */
 void displayStack(stack_t * stack)
@@ -34,7 +34,7 @@ void displayStack(stack_t * stack)
 /**
  * @brief Ajoute un element a la fin (au dessus) de la pile.
  * Retourne 1 si l'ajout ete effectue correctement
- * 
+ *
  * @param stack stack_t* - La pile auquelle on veut ajouter un element
  * @param t T - L'element que l'on veut ajouter
  * @return int - Si l'ajout a ete effectue avec succes
@@ -55,9 +55,10 @@ int push(stack_t * stack, T t)
 }
 
 /**
- * @brief Supprime le premier element de la pile (element du dessus de la pile / element de la fin du tableau). 
- * Renvoie 1 si la suppression a ete correctement effectuee 
- * 
+ * @brief Supprime le premier element de la pile (element du dessus de la pile /
+ * element de la fin du tableau). Renvoie 1 si la suppression a ete correctement
+ * effectuee
+ *
  * @param stack stack_t* - La pile dont on veut supprimer l'element du dessus
  * @return int - Si la suppression a ete effectue avec succes
  */
@@ -76,12 +77,13 @@ int pop(stack_t * stack)
 }
 
 /**
- * @brief Retourne l'element du dessus de la pile sans le supprimer. 
+ * @brief Retourne l'element du dessus de la pile sans le supprimer.
  * Retourne 0 si la pile est vide.
- * Si on avait utilise des structures on aurait pu retourner NULL ce qui aurait ete plus adapte.
- * 
+ * Si on avait utilise des structures on aurait pu retourner NULL ce qui aurait
+ * ete plus adapte.
+ *
  * @param stack stack_t* - La pile dont on veut voir l'element du dessus
- * @return T 
+ * @return T
  */
 T peek(stack_t * stack)
 {
@@ -100,7 +102,7 @@ T peek(stack_t * stack)
 
 /**
  * @brief Si la pile est vide ou pas
- * 
+ *
  * @param stack stack_t
  * @return int - 1 si la pile est vide, 0 sinon
  */
@@ -116,7 +118,7 @@ int isEmptyStack(stack_t * stack)
 
 /**
  * @brief Libere la pile
- * 
+ *
  * @param stack stack_t* - La pile que l'on veut liberer
  */
 void freeStack(stack_t * stack)
