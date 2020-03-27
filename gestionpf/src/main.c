@@ -75,7 +75,7 @@ void testStack(){
 }
 
 void testQueue(){
-    queue_t * queue = createQueue(5);
+    queue_t * queue = createQueue(4);
     pushBack(queue, 1);
     pushBack(queue, 2);
     pushBack(queue, 3);

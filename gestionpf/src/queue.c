@@ -15,6 +15,7 @@ queue_t * createQueue(int capacity)
     queue_t * queue = malloc(sizeof(*queue));
 
     queue->capacity = capacity;
+    queue->size     = 0;
     queue->base     = malloc(capacity * sizeof(T));
     queue->head     = 0;
     queue->tail     = 0;
@@ -52,16 +53,11 @@ int pushBack(queue_t * queue, T element)
     }
     else
     {
+        if (!isEmptyQueue(queue)) {
+            queue->tail = (queue->tail + 1) % queue->capacity;
+        }
         queue->base[queue->tail] = element;
-
-        if(queue->tail + 1 == queue->capacity)
-        {
-            queue->tail = 0;
-        }
-        else
-        {
-            queue->tail += 1;
-        }
+        queue->size += 1;
     }
     return success;
 }
@@ -81,14 +77,8 @@ int popFront(queue_t * queue)
     }
     else
     {
-        if(queue->head > queue->capacity)
-        {
-            queue->head = 0;
-        }
-        else
-        {
-            queue->head += 1;
-        }
+        queue->head = (queue->head + 1) % queue->capacity;
+        queue->size -= 1;
     }
     return success;
 }
@@ -119,7 +109,7 @@ T front(queue_t * queue)
 int isEmptyQueue(queue_t * queue)
 {
     int empty = 0;
-    if(queue->tail == queue->head)
+    if(queue->size == 0)
     {
         empty = 1;
     }
@@ -135,9 +125,7 @@ int isEmptyQueue(queue_t * queue)
 int isFullQueue(queue_t * queue)
 {
     int full = 0;
-    if((queue->head == 0 && queue->tail == queue->capacity) ||
-       queue->tail == (queue->head - 1))
-    {
+    if(queue->size == queue->capacity) {
         full = 1;
     }
     return full;
@@ -150,7 +138,6 @@ int isFullQueue(queue_t * queue)
  */
 void freeQueue(queue_t * queue)
 {
-
     free(queue->base);
     free(queue);
     queue = NULL;
