@@ -19,6 +19,7 @@ void reverseStack(stack_t * stack)
         push(stack, front(queue));
         popFront(queue);
     }
+    freeQueue(queue);
 }
 
 int Ackerman(int m, int n)
@@ -54,8 +55,8 @@ int Ackerman(int m, int n)
             }
         }
     }
-    return ni;
     freeStack(pile);
+    return ni;
 }
 
 int main()
@@ -70,20 +71,22 @@ int main()
     reverseStack(stack);
     displayStack(stack);
 
+    freeStack(stack);
+
     printf("\nqueue ; \n");
 
-    queue_t * queue = createQueue(5);
-    pushBack(queue, 1);
-    pushBack(queue, 2);
-    pushBack(queue, 3);
-    pushBack(queue, 4);
+    // queue_t * queue = createQueue(5);
+    // pushBack(queue, 1);
+    // pushBack(queue, 2);
+    // pushBack(queue, 3);
+    // pushBack(queue, 4);
+    // // displayQueue(queue);
+    // popFront(queue);
+    // pushBack(queue, 5);
+    // pushBack(queue, 6);
+    // popFront(queue);
     // displayQueue(queue);
-    popFront(queue);
-    pushBack(queue, 5);
-    pushBack(queue, 6);
-    popFront(queue);
-    displayQueue(queue);
-    freeQueue(queue);
+    // freeQueue(queue);
 
     return 0;
 }
