@@ -1,5 +1,3 @@
-// david.brevet@uca.fr
-
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -22,7 +20,7 @@ void reverseStack(stack_t * stack)
     freeQueue(queue);
 }
 
-int Ackerman(int m, int n)
+int ackerman(int m, int n)
 {
 
 
@@ -61,47 +59,66 @@ int Ackerman(int m, int n)
     return ni;
 }
 
-void test_Stack(){
-    printf("jeux de test pour la pile :\n");
+void testStack(){
     stack_t * stack = createStack(4);
     push(stack, 1);
     push(stack, 2);
     push(stack, 3);
     push(stack, 4);
+    
     displayStack(stack);
+    
     pop(stack);
-    printf("\n dernier element de la pile apres un pop : %d \n", peek(stack));
-    free(stack);
+    printf("Dernier element de la pile apres un pop : %d\n", peek(stack));
+    
+    freeStack(stack);
 }
 
-void test_queue(){
-    printf("jeux de test pour la file :\n");
+void testQueue(){
     queue_t * queue = createQueue(5);
     pushBack(queue, 1);
     pushBack(queue, 2);
     pushBack(queue, 3);
     pushBack(queue, 4);
-    displayQueue(queue);
-    popFront(queue);
-    printf("\n le premier element de la file  apres un pop est %d \n", front(queue));
-    free(queue);
-
-}
-int main()
-{
     
-    test_Stack();
-    test_queue();
+    displayQueue(queue);
+    
+    popFront(queue);
+    printf("Premier element de la file  apres un pop : %d\n", front(queue));
+    
+    freeQueue(queue);
+}
 
-    printf("test de la fonction reverse :\n");
+void testReverse() {
     stack_t * stack = createStack(4);
     push(stack, 1);
     push(stack, 2);
     push(stack, 3);
     push(stack, 4);
+    
+    printf("Avant reverse:\n");
+    displayStack(stack);
+    
     reverseStack(stack);
     
-    printf("\n test fonction Ackermann(2,2) : %d", Ackerman(2,2));
+    printf("Apres reverse:\n");
+    displayStack(stack);
+
+    freeStack(stack);
+}
+
+int main()
+{
+    
+    printf("TEST - Stack:\n");
+    testStack();
+    printf("TEST - Queue:\n");
+    testQueue();
+
+    printf("TEST - Reverse:\n");
+    testReverse();
+    
+    printf("TEST - Ackermann(2,2) : %d\n", ackerman(2,2));
 
     return 0;
 }
