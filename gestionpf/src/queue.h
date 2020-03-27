@@ -1,12 +1,15 @@
 typedef int T;
 
+/**
+ * @brief Structure Queue. La file.
+ * 
+ */
 typedef struct queue
 {
-    int capacity;
-    int size;
-    int head;
-    int tail;
-    T * base;
+    int capacity; // La capactie maximum de la file (nombre d'elements maximum dans cette file)
+    int head; // L'indice du premier element
+    int tail; // L'indice du dernier element
+    T * base; // Le tableau d'elements de la file
 } queue_t;
 
 queue_t * createQueue(int);

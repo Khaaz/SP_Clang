@@ -3,6 +3,13 @@
 
 #include "queue.h"
 
+/**
+ * @brief Creer un objet Queue (File).
+ * C'est le pointeur sur le premier element.
+ * 
+ * @param capacity int - Le nombre maximum d'element dans la file
+ * @return queue_t* 
+ */
 queue_t * createQueue(int capacity)
 {
     queue_t * queue = malloc(sizeof(*queue));
@@ -14,6 +21,11 @@ queue_t * createQueue(int capacity)
     return queue;
 }
 
+/**
+ * @brief Affiche le contenu de la file.
+ * 
+ * @param queue queue_t* - La file a afficher
+ */
 void displayQueue(queue_t * queue)
 {
     int i = queue->head;
@@ -24,6 +36,13 @@ void displayQueue(queue_t * queue)
     }
 }
 
+/**
+ * @brief Ajoute un element a la fin de la file. Si la file est deja pleine, n'ajoutes pas l'element et renvoie 0
+ * 
+ * @param queue queue_t* - La file ou ajouter un element
+ * @param element T - L'element a ajouter
+ * @return int - Si l'ajout a ete effectue avec succes
+ */
 int pushBack(queue_t * queue, T element)
 {
     int success = 1;
@@ -47,6 +66,12 @@ int pushBack(queue_t * queue, T element)
     return success;
 }
 
+/**
+ * @brief Enleve le premier element de la file. Si la pile est deja vide, remvoie 0;
+ * 
+ * @param queue queue_t* - La file d'ou enlever l'element
+ * @return int - Si la suppression a ete effectue avec succes.
+ */
 int popFront(queue_t * queue)
 {
     int success = 1;
@@ -68,6 +93,12 @@ int popFront(queue_t * queue)
     return success;
 }
 
+/**
+ * @brief Retourne le premier element de la file sans le supprimer.
+ * 
+ * @param queue queue_t* - La file dont on veut regarder le premier element 
+ * @return T - Le premier element de la file
+ */
 T front(queue_t * queue)
 {
     T element;
@@ -79,6 +110,12 @@ T front(queue_t * queue)
     return element;
 }
 
+/**
+ * @brief Si la file est vide ou pas
+ * 
+ * @param queue queue_t* - La file dont on veut savoir si elle est vide
+ * @return int - Si la file est vide (0 si non, 1 si oui)
+ */
 int isEmptyQueue(queue_t * queue)
 {
     int empty = 0;
@@ -89,6 +126,12 @@ int isEmptyQueue(queue_t * queue)
     return empty;
 }
 
+/**
+ * @brief Si la file est pleine ou pas
+ * 
+ * @param queue queue_t* - La file dont on veut savoir si elle est pleine
+ * @return int - Si la file est pleine (0 si non, 1 si oui)
+ */
 int isFullQueue(queue_t * queue)
 {
     int full = 0;
@@ -100,6 +143,11 @@ int isFullQueue(queue_t * queue)
     return full;
 }
 
+/**
+ * @brief Libere la file
+ * 
+ * @param queue queue_t* - La queue que on libere. 
+ */
 void freeQueue(queue_t * queue)
 {
 
