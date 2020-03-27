@@ -24,6 +24,8 @@ void reverseStack(stack_t * stack)
 
 int Ackerman(int m, int n)
 {
+
+
     int       mi     = m;
     int       ni     = n;
     stack_t * pile   = createStack(10);
@@ -59,34 +61,47 @@ int Ackerman(int m, int n)
     return ni;
 }
 
-int main()
-{
-
+void test_Stack(){
+    printf("jeux de test pour la pile :\n");
     stack_t * stack = createStack(4);
     push(stack, 1);
     push(stack, 2);
     push(stack, 3);
     push(stack, 4);
     displayStack(stack);
+    pop(stack);
+    printf("\n dernier element de la pile apres un pop : %d \n", peek(stack));
+    free(stack);
+}
+
+void test_queue(){
+    printf("jeux de test pour la file :\n");
+    queue_t * queue = createQueue(5);
+    pushBack(queue, 1);
+    pushBack(queue, 2);
+    pushBack(queue, 3);
+    pushBack(queue, 4);
+    displayQueue(queue);
+    popFront(queue);
+    printf("\n le premier element de la file  apres un pop est %d \n", front(queue));
+    free(queue);
+
+}
+int main()
+{
+    
+    test_Stack();
+    test_queue();
+
+    printf("test de la fonction reverse :\n");
+    stack_t * stack = createStack(4);
+    push(stack, 1);
+    push(stack, 2);
+    push(stack, 3);
+    push(stack, 4);
     reverseStack(stack);
-    displayStack(stack);
-
-    freeStack(stack);
-
-    printf("\nqueue ; \n");
-
-    // queue_t * queue = createQueue(5);
-    // pushBack(queue, 1);
-    // pushBack(queue, 2);
-    // pushBack(queue, 3);
-    // pushBack(queue, 4);
-    // // displayQueue(queue);
-    // popFront(queue);
-    // pushBack(queue, 5);
-    // pushBack(queue, 6);
-    // popFront(queue);
-    // displayQueue(queue);
-    // freeQueue(queue);
+    
+    printf("\n test fonction Ackermann(2,2) : %d", Ackerman(2,2));
 
     return 0;
 }
