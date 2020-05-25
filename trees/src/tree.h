@@ -10,3 +10,6 @@ typedef struct node
     struct node * son;     // pointeur vers l'element file (lien vertical)
     struct node * brother; // pointeur vers l'element frere (lien horizontal)
 } node_t;
+
+node_t * createNode(char);
+void     insertBrother(node_t *, node_t *) void insertSon(node_t *, node_t *)

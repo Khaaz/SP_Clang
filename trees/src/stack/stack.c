@@ -124,7 +124,7 @@ int isEmptyStack(stack_t * stack)
 void freeStack(stack_t * stack)
 {
 
-    for(int i = stack->top; i < stack->capacity; i++)
+    for(int i = 0; i < stack->top; i++)
     {
         free(stack->base[i]);
     }
