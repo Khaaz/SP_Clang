@@ -90,3 +90,45 @@ node_t * createTree(char * treeString)
 
     freeStack(stack);
 }
+
+void freeTree(node_t * tree)
+{
+    stack_t * stack = createStack(50);
+    node_t *  cour  = tree;
+    node_t *  tmp   = NULL;
+
+    while(cour != NULL)
+    {
+        if(cour->son != NULL)
+        {
+            tmp       = cour->son;
+            cour->son = NULL;
+            push(stack, cour);
+            cour = tmp;
+        }
+        else
+        {
+            if(cour->brother != NULL)
+            {
+                tmp           = cour->brother;
+                cour->brother = NULL;
+                free(cour);
+                cour = tmp;
+            }
+            else
+            {
+                free(cour);
+                if(isEmptyStack(stack) == 0)
+                {
+                    cour = peek(stack);
+                    pop(stack);
+                }
+                else
+                {
+                    cour = NULL;
+                }
+            }
+        }
+    }
+    freeStack(stack);
+}
