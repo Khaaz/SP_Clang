@@ -88,5 +88,18 @@ node_t * search(node_t * node, char valeur)
             popFront(queue);
         }
     }
-    return cour;
+    return cour->son;
+}
+
+void insertion (char noeud, char value, node_t * node)
+{
+    node_t * cour = search(node, noeud);
+    node_t ** prec = &cour;
+    node_t * newnode = createNode(value);
+    while( (*prec)->value < value && (*prec)->brother != NULL)
+    {  
+        prec = &((*prec)->brother);
+    }
+    newnode->brother = *prec;
+    *prec = newnode;
 }
