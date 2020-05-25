@@ -12,4 +12,7 @@ typedef struct node
 } node_t;
 
 node_t * createNode(char);
-void     insertBrother(node_t *, node_t *) void insertSon(node_t *, node_t *)
+void     insertBrother(node_t *, node_t *);
+void     insertSon(node_t *, node_t *);
+void     Insertion(node_t *, int *, char *);
+node_t * search(node_t *, char valeur);
