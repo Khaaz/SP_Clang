@@ -40,14 +40,14 @@ void getPostfix(node_t * node, int * taille, char * liste)
             cour = cour->son;
         }
         liste[*taille] = cour->value;
-        *taille++;
+        ++(*taille);
         cour = cour->brother;
-        while(cour = NULL && isEmptyStack(stack) == 0)
+        while(cour == NULL && isEmptyStack(stack) == 0)
         {
             cour = peek(stack);
             pop(stack);
             liste[*taille] = cour->value;
-            *taille++;
+            ++(*taille);
             cour = cour->brother;
         }
     }
@@ -61,7 +61,7 @@ void displayPostFix(char * liste, int taille)
 
     for(i = 0; i <= taille; i++)
     {
-        print("%c ", liste[i]);
+        printf("%c ", liste[i]);
     }
 }
 

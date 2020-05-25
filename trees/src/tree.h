@@ -1,6 +1,8 @@
 #include <stdlib.h>
+#include <stdio.h>
 
-typedef char T;
+#ifndef _INCL_GUARD
+#define _INCL_GUARD
 
 /**
  * @brief Structure Tree. Le maillon qui compose notre arbre
@@ -19,3 +21,5 @@ void     insertSon(node_t *, node_t *);
 void     getPostfix(node_t *, int *, char *);
 void     displayPostfix(char *, int);
 node_t * search(node_t *, char valeur);
+
+#endif
