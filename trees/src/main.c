@@ -131,3 +131,64 @@ void freeTree(node_t * tree)
     }
     freeStack(stack);
 }
+
+void testTrees(){
+    char liste[100];
+    int taille = 0;
+    //creation de l'arbre : a*(b*(k*(h+u)+z)+f*m+x*(p+v+w)).
+    node_t * node = createTree("a*(b*(k*(h+u)+z)+f*m+x*(p+v+w))");
+    getPostfix(node, &taille, liste);
+    displayPostfix(liste, taille);
+
+    //test de la fonction search
+    //recherche du noeud a, f, u, w
+    node_t * search = search(node, "a");
+    printf("recherche du noeud a: %c ", search->value);
+    node_t * search = search(node, "f");
+    printf("recherche du noeud f: %c ", search->value);
+    node_t * search = search(node, "u");
+    printf("recherche du noeud u: %c ", search->value);
+    node_t * search = search(node, "w");
+    printf("recherche du noeud w: %c ", search->value);
+
+    //test de la fonction insertion.
+    //insertion a la racine
+    insertion("a", "l", node );
+    taille = 0;
+    getPostfix(node, &taille, liste);
+    displayPostfix(liste, taille);
+
+    //insertion au milieu
+    insertion("b", "s", node);
+    taille = 0;
+    getPostfix(node, &taille, liste);
+    displayPostfix(liste, taille);
+    
+    //insertion sur une feuille
+    insertion("h", "i", node);
+    taille = 0;
+    getPostfix(node, &taille, liste);
+    displayPostfix(liste, taille);
+
+    //insertion sur un noeud qui n'existe pas
+    insertion("r", "e", node);
+    
+
+    //insertion devant la fratrie lors du tri par ordre alphabétique
+    insertion("x", "j", node);
+    taille = 0;
+    getPostfix(node, &taille, liste);
+    displayPostfix(liste, taille);
+
+    //insertion au milieu de la fratrie lors du tri par ordre alphabétique
+    insertion("x", "q", node);
+    taille = 0;
+    getPostfix(node, &taille, liste);
+    displayPostfix(liste, taille);
+
+    //insertion  la fin de la fratrie lors du tri par ordre alphabétique
+    insertion("x", "y", node);
+    taille = 0;
+    getPostfix(node, &taille, liste);
+    displayPostfix(liste, taille);
+}
