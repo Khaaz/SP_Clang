@@ -4,7 +4,8 @@
 
 node_t * createNode(char value)
 {
-    node_t * node = malloc(sizeof(*node));
+    node_t * node = NULL;
+    node = malloc(sizeof(*node));
     if(node != NULL)
     {
         node->value   = value;
@@ -28,10 +29,10 @@ void insertSon(node_t * node, node_t * element)
     node->son = element;
 }
 
-void getPostfix(node_t * node, int * taille, char * liste)
+void getPostfix(node_t * node, char * list, int * size)
 {
     node_t *  cour  = node;
-    stack_t * stack = createStack(10);
+    stack_t * stack = createStack(50);
     while(cour != NULL)
     {
         while(cour->son)
@@ -39,30 +40,31 @@ void getPostfix(node_t * node, int * taille, char * liste)
             push(stack, cour);
             cour = cour->son;
         }
-        liste[*taille] = cour->value;
-        ++(*taille);
+        list[*size] = cour->value;
+        ++(*size);
         cour = cour->brother;
         while(cour == NULL && isEmptyStack(stack) == 0)
         {
             cour = peek(stack);
             pop(stack);
-            liste[*taille] = cour->value;
-            ++(*taille);
+            list[*size] = cour->value;
+            ++(*size);
             cour = cour->brother;
         }
     }
     freeStack(stack);
 }
 
-void displayPostFix(char * liste, int taille)
+void displayPostfix(char * liste, int taille)
 {
     int i;
-    printf("Ordre prefixe : \n");
+    printf("Ordre postfix:\n");
 
-    for(i = 0; i <= taille; i++)
+    for(i = 0; i < taille; i++)
     {
-        printf("%c ", liste[i]);
+        printf("%c", liste[i]);
     }
+    printf("\n");
 }
 
 node_t * search(node_t * node, char valeur)

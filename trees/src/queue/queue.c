@@ -32,7 +32,7 @@ void displayQueue(queue_t * queue)
     int i = queue->head;
     while(i != queue->tail)
     {
-        printf("%d\n", queue->base[i]);
+        printf("%d\n", queue->base[i]->value);
         i = (i + 1) % queue->capacity;
     }
 }

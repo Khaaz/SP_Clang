@@ -27,7 +27,7 @@ void displayStack(stack_t * stack)
 {
     for(int i = 0; i < stack->top + 1; i++)
     {
-        printf("%d \n", stack->base[i]);
+        printf("%d \n", stack->base[i]->value);
     }
 }
 

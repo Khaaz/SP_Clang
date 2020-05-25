@@ -18,7 +18,7 @@ typedef struct node
 node_t * createNode(char);
 void     insertBrother(node_t *, node_t *);
 void     insertSon(node_t *, node_t *);
-void     getPostfix(node_t *, int *, char *);
+void     getPostfix(node_t *, char *, int *);
 void     displayPostfix(char *, int);
 node_t * search(node_t *, char valeur);
 
