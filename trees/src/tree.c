@@ -168,16 +168,15 @@ void displayPostfix(char * liste, int taille)
     printf("\n");
 }
 
-node_t * search(node_t * node, char valeur)
+node_t * search(node_t * node, char value)
 {
     node_t *  cour  = node;
-    queue_t * queue = createQueue(10);
-    while(cour != NULL || cour->value != valeur)
+    queue_t * queue = createQueue(50);
+    while(cour != NULL && cour->value != value)
     {
-
         if(cour->son != NULL)
         {
-            pushBack(queue, cour);
+            pushBack(queue, cour->son);
         }
         if(cour->brother != NULL)
         {
@@ -189,18 +188,21 @@ node_t * search(node_t * node, char valeur)
             popFront(queue);
         }
     }
-    return cour->son;
+    return cour;
 }
 
-void insertion (char noeud, char value, node_t * node)
+void insertion(node_t * node, char noeud, char value)
 {
     node_t * cour = search(node, noeud);
-    node_t ** prec = &cour;
-    node_t * newnode = createNode(value);
-    while( (*prec)->value < value && (*prec)->brother != NULL)
-    {  
-        prec = &((*prec)->brother);
+    if (cour != NULL) {
+        printf("SEARCHED: %c\n", cour->value);
+        node_t ** prec = &(cour->son);
+        node_t * newnode = createNode(value);
+        while( (*prec)->value < value && (*prec)->brother != NULL)
+        {  
+            prec = &((*prec)->brother);
+        }
+        newnode->brother = *prec;
+        *prec = newnode;
     }
-    newnode->brother = *prec;
-    *prec = newnode;
 }

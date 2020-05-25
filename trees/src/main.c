@@ -33,8 +33,11 @@ int main(int argc, char ** argv)
 
     node_t * tree = createTree(treeString);
 
+    insertion(tree, 'm', 'Z');
+
     getPostfix(tree, list, &size);
     displayPostfix(list, size);
+
 
     freeTree(tree);
     printf("FINI\n");
