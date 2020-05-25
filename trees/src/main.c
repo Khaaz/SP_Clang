@@ -1,7 +1,6 @@
-#include "queue/queue.h"
 #include "stack/stack.h"
 #include "tree.h"
-#include <stdlib.h>
+#include <stdio.h>
 
 int main(int argc, char * argv)
 {
@@ -71,7 +70,7 @@ node_t * createTree(char * treeString)
                     node_t * element = createNode(treeString[i]);
                     insertSon(cur, element);
 
-                    push(cur);
+                    push(stack, cur);
                     cur = element;
                 }
                 else // char

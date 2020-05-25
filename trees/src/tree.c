@@ -1,17 +1,19 @@
-#include "tree.c"
+#include "tree.h"
+#include "queue/queue.h"
+#include "stack/stack.h"
 
 node_t * createNode(char value)
 {
     node_t * node = malloc(sizeof(*node));
     if(node != NULL)
     {
-        stack->value   = value;
-        stack->son     = NULL;
-        stack->brother = NULL;
+        node->value   = value;
+        node->son     = NULL;
+        node->brother = NULL;
     }
     else
     {
-        printf("ERROR: Allocation Node\n")
+        printf("ERROR: Allocation Node\n");
     }
     return node;
 }
@@ -59,7 +61,7 @@ void displayPostFix(char * liste, int taille)
 
     for(i = 0; i <= taille; i++)
     {
-        print("%c ", liste[i];)
+        print("%c ", liste[i]);
     }
 }
 
