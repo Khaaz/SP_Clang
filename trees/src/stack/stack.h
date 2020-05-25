@@ -1,4 +1,6 @@
-typedef int T;
+#include "../tree.h"
+
+typedef node_t * T;
 
 /**
  * @brief Structure Stack. La pile

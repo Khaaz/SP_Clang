@@ -78,7 +78,7 @@ int pop(stack_t * stack)
 
 /**
  * @brief Retourne l'element du dessus de la pile sans le supprimer.
- * Retourne 0 si la pile est vide.
+ * Retourne NULL si la pile est vide.
  * Si on avait utilise des structures on aurait pu retourner NULL ce qui aurait
  * ete plus adapte.
  *
@@ -90,7 +90,7 @@ T peek(stack_t * stack)
     T t;
     if(isEmptyStack(stack))
     {
-        t = 0;
+        t = NULL;
     }
     else
     {
@@ -124,6 +124,10 @@ int isEmptyStack(stack_t * stack)
 void freeStack(stack_t * stack)
 {
 
+    for(int i = stack->top; i < stack->capacity; i++)
+    {
+        free(stack->base[i]);
+    }
     free(stack->base);
     free(stack);
     stack = NULL;
