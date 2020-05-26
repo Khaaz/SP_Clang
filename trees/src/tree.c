@@ -171,7 +171,7 @@ void displayPostfix(char * liste, int taille)
 node_t * search(node_t * node, char value)
 {
     node_t *  cour  = node;
-    queue_t * queue = createQueue(10);
+    queue_t * queue = createQueue(50);
     while(cour != NULL && cour->value != value)
     {
         if(cour->son != NULL)
@@ -196,10 +196,9 @@ void insertion(node_t * node, char noeud, char value)
 {
     node_t * cour = search(node, noeud);
     if (cour != NULL) {
-        printf("SEARCHED: %c\n", cour->value);
         node_t ** prec = &(cour->son);
         node_t * newnode = createNode(value);
-        while( (*prec)->value < value && (*prec)->brother != NULL)
+        while( *prec != NULL && (*prec)->value < value )
         {  
             prec = &((*prec)->brother);
         }

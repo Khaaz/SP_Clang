@@ -110,11 +110,6 @@ int isEmptyStack(stack_t * stack)
  */
 void freeStack(stack_t * stack)
 {
-
-    for(int i = 0; i < stack->top; i++)
-    {
-        free(stack->base[i]);
-    }
     free(stack->base);
     free(stack);
     stack = NULL;

@@ -94,8 +94,7 @@ int main(int argc, char ** argv)
     printf("Chaine a trandformer en arbre: %s\n", treeString);
 
     node_t * tree = createTree(treeString);
-
-    insertion(tree, 'u', 'Z');
+    insertion(tree, 'a', 'c');
 
     getPostfix(tree, list, &size);
     displayPostfix(list, size);
