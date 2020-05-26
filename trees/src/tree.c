@@ -2,10 +2,16 @@
 #include "queue/queue.h"
 #include "stack/stack.h"
 
+/**
+ * @brief Cree un node (un noeud de notre arbre)
+ *
+ * @param value char - La valeur du noeud
+ * @return node_t* - le moeud nouvellement cree
+ */
 node_t * createNode(char value)
 {
     node_t * node = NULL;
-    node = malloc(sizeof(*node));
+    node          = malloc(sizeof(*node));
     if(node != NULL)
     {
         node->value   = value;
@@ -19,17 +25,23 @@ node_t * createNode(char value)
     return node;
 }
 
+/**
+ * @brief Cree un arbre a partir d'une notation algebrique
+ *
+ * @param treeString char* - la notation algebrique
+ * @return node_t* - l'arbre nouvellement cree
+ */
 node_t * createTree(char * treeString)
 {
-    int i = 0;
-    char e,c;
+    int       i = 0;
+    char      e, c;
     stack_t * stack = NULL;
-    stack = createStack(50);
+    stack           = createStack(50);
 
-    node_t * tree = NULL;
-    tree = createNode(treeString[i++]);
+    node_t * tree    = NULL;
+    tree             = createNode(treeString[i++]);
     node_t * element = NULL;
-    node_t * cur  = tree;
+    node_t * cur     = tree;
     while(treeString[i] != '\0' && cur != NULL)
     {
         e = treeString[i];
@@ -78,6 +90,11 @@ node_t * createTree(char * treeString)
     return tree;
 }
 
+/**
+ * @brief Libere l'arbre (free tous les noeuds de note arbre)
+ *
+ * @param tree node_t* L'arbre a liberer
+ */
 void freeTree(node_t * tree)
 {
     stack_t * stack = createStack(50);
@@ -120,16 +137,37 @@ void freeTree(node_t * tree)
     freeStack(stack);
 }
 
+/**
+ * @brief Insert un frere sur un noeud donne.
+ *
+ * @param node node_t* - Le noeud dans lequel inserer un frere
+ * @param element node_t* - Le frere a inserer
+ */
 void insertBrother(node_t * node, node_t * element)
 {
     node->brother = element;
 }
 
+/**
+ * @brief Insert un file sur un noeud donne.
+ *
+ * @param node node_t* - Le noeud dans lequel inserer un fils
+ * @param element node_t* - Le fils a inserer
+ */
 void insertSon(node_t * node, node_t * element)
 {
     node->son = element;
 }
 
+/**
+ * @brief Donne la representation post fix de l'arbre. Donne cette
+ * representation dans une list contigue de char donnee en parametre.
+ *
+ * @param node ndoe_t* - L'arbre duquel on veut obtenir la representation
+ * postfix
+ * @param list char* - la liste contigue contenant la representation postfix
+ * @param size int* - la taille logique de note liste
+ */
 void getPostfix(node_t * node, char * list, int * size)
 {
     node_t *  cour  = node;
@@ -156,18 +194,34 @@ void getPostfix(node_t * node, char * list, int * size)
     freeStack(stack);
 }
 
-void displayPostfix(char * liste, int taille)
+/**
+ * @brief Affiche la notation postfix d'un arbre: Affiche le contenu d'une liste
+ * contigue contenant la representation postfix d'un arbre
+ *
+ * @param list char* - la liste contigue contenant la representation postfix
+ * @param taille int - la taille de la liste
+ */
+void displayPostfix(char * list, int taille)
 {
     int i;
     printf("Ordre postfix:\n");
 
     for(i = 0; i < taille; i++)
     {
-        printf("%c", liste[i]);
+        printf("%c", list[i]);
     }
     printf("\n");
 }
 
+/**
+ * @brief Cherche dans l'arbre le premier noeud de valeur donne.
+ * La recherche est une recherche par parcours de premier ordre par niveau.
+ * (parcours en largeur de premier ordre par niveau) On utilise une file.
+ *
+ * @param node node_t* - l'arbre dans lequel rechercher
+ * @param value char - la valeur a recherche dans l'arbre
+ * @return node_t* - le neoud trouve apres la recherche
+ */
 node_t * search(node_t * node, char value)
 {
     node_t *  cour  = node;
@@ -192,23 +246,37 @@ node_t * search(node_t * node, char value)
     return cour;
 }
 
+/**
+ * @brief Creer et insert un noeud de valeur donnee dans l'arbre. Insert dans
+ * les fils du noeud donne en parametre. Le noeud donne en parametre est donne
+ * sous format de char, et est donc trouve en utilisant search. L'insertion dans
+ * les fils se fait en suivant l'ordre alphabetique.
+ *
+ * @param node node_t* - l'arbre dans lequel inserer
+ * @param noeud char - la valeur du noeud a trouver et dans lequel inserer
+ * @param value char - la valeur du noeud a creer et inserer
+ * @return int - Si la fonction a marche correctement
+ */
 int insertion(node_t * node, char noeud, char value)
 {
-    int code = 1;
-    node_t * cour = search(node, noeud);
-    node_t ** prec = NULL;
-    node_t * newnode = NULL;
-    if (cour != NULL) {
-        prec = &(cour->son);
+    int       code    = 1;
+    node_t *  cour    = search(node, noeud);
+    node_t ** prec    = NULL;
+    node_t *  newnode = NULL;
+    if(cour != NULL)
+    {
+        prec    = &(cour->son);
         newnode = createNode(value);
-        
-        while( *prec != NULL && (*prec)->value < value )
-        {  
+
+        while(*prec != NULL && (*prec)->value < value)
+        {
             prec = &((*prec)->brother);
         }
         newnode->brother = *prec;
-        *prec = newnode;
-    } else {
+        *prec            = newnode;
+    }
+    else
+    {
         code = 0;
         printf("ERROR: Insertion dans un noeud inexistant\n");
     }

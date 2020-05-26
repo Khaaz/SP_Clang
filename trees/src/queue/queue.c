@@ -124,7 +124,8 @@ int isFullQueue(queue_t * queue)
 void freeQueue(queue_t * queue)
 {
     int i = queue->head;
-    while(i != queue->tail) {
+    while(i != queue->tail)
+    {
         queue->base[i % queue->capacity] = NULL;
         ++i;
     }
