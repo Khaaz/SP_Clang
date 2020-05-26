@@ -171,7 +171,7 @@ void displayPostfix(char * liste, int taille)
 node_t * search(node_t * node, char value)
 {
     node_t *  cour  = node;
-    queue_t * queue = createQueue(50);
+    queue_t * queue = createQueue(10);
     while(cour != NULL && cour->value != value)
     {
         if(cour->son != NULL)
@@ -188,6 +188,7 @@ node_t * search(node_t * node, char value)
             popFront(queue);
         }
     }
+    freeQueue(queue);
     return cour;
 }
 

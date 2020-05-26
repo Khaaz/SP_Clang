@@ -20,60 +20,60 @@ void testTrees(){
     int taille = 0;
     node_t * searched = NULL;
     //creation de l'arbre : a*(b*(k*(h+u)+z)+f*m+x*(p+v+w)).
-    node_t * node = createTree("a*(b*(k*(h+u)+z)+f*m+x*(p+v+w))");
-    getPostfix(node, &taille, liste);
+    node_t * tree = createTree("a*(b*(k*(h+u)+z)+f*m+x*(p+v+w))");
+    getPostfix(tree, liste, &taille);
     displayPostfix(liste, taille);
 
     //test de la fonction search
     //recherche du noeud a, f, u, w
-    searched = search(node, "a");
+    searched = search(tree, 'a');
     printf("recherche du noeud a: %c ", searched->value);
-    searched = search(node, "f");
+    searched = search(tree, 'f');
     printf("recherche du noeud f: %c ", searched->value);
-    searched = search(node, "u");
+    searched = search(tree, 'u');
     printf("recherche du noeud u: %c ", searched->value);
-    searched = search(node, "w");
+    searched = search(tree, 'w');
     printf("recherche du noeud w: %c ", searched->value);
 
     //test de la fonction insertion.
     //insertion a la racine
-    insertion("a", "l", node );
+    insertion(tree, 'l', 'X' );
     taille = 0;
-    getPostfix(node, &taille, liste);
+    getPostfix(tree, liste, &taille);
     displayPostfix(liste, taille);
 
     //insertion au milieu
-    insertion("b", "s", node);
+    insertion(tree, 's', 'X');
     taille = 0;
-    getPostfix(node, &taille, liste);
+    getPostfix(tree, liste, &taille);
     displayPostfix(liste, taille);
     
     //insertion sur une feuille
-    insertion("h", "i", node);
+    insertion(tree, 'i', 'X');
     taille = 0;
-    getPostfix(node, &taille, liste);
+    getPostfix(tree, liste, &taille);
     displayPostfix(liste, taille);
 
     //insertion sur un noeud qui n'existe pas
-    insertion("r", "e", node);
+    insertion(tree, 'e', 'X');
     
 
     //insertion devant la fratrie lors du tri par ordre alphabétique
-    insertion("x", "j", node);
+    insertion(tree, 'j', 'X');
     taille = 0;
-    getPostfix(node, &taille, liste);
+    getPostfix(tree, liste, &taille);
     displayPostfix(liste, taille);
 
     //insertion au milieu de la fratrie lors du tri par ordre alphabétique
-    insertion("x", "q", node);
+    insertion(tree, 'q', 'X');
     taille = 0;
-    getPostfix(node, &taille, liste);
+    getPostfix(tree, liste, &taille);
     displayPostfix(liste, taille);
 
     //insertion  la fin de la fratrie lors du tri par ordre alphabétique
-    insertion("x", "y", node);
+    insertion(tree, 'y', 'X');
     taille = 0;
-    getPostfix(node, &taille, liste);
+    getPostfix(tree, liste, &taille);
     displayPostfix(liste, taille);
 }
 
@@ -95,7 +95,7 @@ int main(int argc, char ** argv)
 
     node_t * tree = createTree(treeString);
 
-    insertion(tree, 'm', 'Z');
+    insertion(tree, 'u', 'Z');
 
     getPostfix(tree, list, &size);
     displayPostfix(list, size);

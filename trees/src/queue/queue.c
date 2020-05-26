@@ -23,21 +23,6 @@ queue_t * createQueue(int capacity)
 }
 
 /**
- * @brief Affiche le contenu de la file.
- *
- * @param queue queue_t* - La file a afficher
- */
-void displayQueue(queue_t * queue)
-{
-    int i = queue->head;
-    while(i != queue->tail)
-    {
-        printf("%d\n", queue->base[i]->value);
-        i = (i + 1) % queue->capacity;
-    }
-}
-
-/**
  * @brief Ajoute un element a la fin de la file. Si la file est deja pleine,
  * n'ajoutes pas l'element et renvoie 0
  *
@@ -80,7 +65,9 @@ int popFront(queue_t * queue)
     }
     else
     {
-        queue->head = (queue->head + 1) % queue->capacity;
+        if (queue->size > 1) {
+            queue->head = (queue->head + 1) % queue->capacity;
+        }
         queue->size -= 1;
     }
     return success;

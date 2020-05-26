@@ -19,19 +19,6 @@ stack_t * createStack(int capacity)
 }
 
 /**
- * @brief Affiche le contenue de la pile
- *
- * @param stack stack_t* - La pile a afficher
- */
-void displayStack(stack_t * stack)
-{
-    for(int i = 0; i < stack->top + 1; i++)
-    {
-        printf("%d \n", stack->base[i]->value);
-    }
-}
-
-/**
  * @brief Ajoute un element a la fin (au dessus) de la pile.
  * Retourne 1 si l'ajout ete effectue correctement
  *

@@ -22,5 +22,4 @@ int       popFront(queue_t *);
 T         front(queue_t *);
 int       isEmptyQueue(queue_t *);
 int       isFullQueue(queue_t *);
-void      displayQueue(queue_t *);
 void      freeQueue(queue_t *);
