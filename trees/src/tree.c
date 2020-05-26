@@ -192,17 +192,25 @@ node_t * search(node_t * node, char value)
     return cour;
 }
 
-void insertion(node_t * node, char noeud, char value)
+int insertion(node_t * node, char noeud, char value)
 {
+    int code = 1;
     node_t * cour = search(node, noeud);
+    node_t ** prec = NULL;
+    node_t * newnode = NULL;
     if (cour != NULL) {
-        node_t ** prec = &(cour->son);
-        node_t * newnode = createNode(value);
+        prec = &(cour->son);
+        newnode = createNode(value);
+        
         while( *prec != NULL && (*prec)->value < value )
         {  
             prec = &((*prec)->brother);
         }
         newnode->brother = *prec;
         *prec = newnode;
+    } else {
+        code = 0;
+        printf("ERROR: Insertion dans un noeud inexistant\n");
     }
+    return code;
 }

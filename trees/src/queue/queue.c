@@ -39,12 +39,9 @@ int pushBack(queue_t * queue, T element)
     }
     else
     {
-        if(!isEmptyQueue(queue))
-        {
-            queue->tail = (queue->tail + 1) % queue->capacity;
-        }
-        queue->base[queue->tail] = element;
-        queue->size += 1;
+        queue->base[queue->tail % queue->capacity] = element;
+        ++queue->size;
+        ++queue->tail;
     }
     return success;
 }
@@ -65,9 +62,7 @@ int popFront(queue_t * queue)
     }
     else
     {
-        if (queue->size > 1) {
-            queue->head = (queue->head + 1) % queue->capacity;
-        }
+        queue->head = (queue->head + 1) % queue->capacity;
         queue->size -= 1;
     }
     return success;
@@ -81,12 +76,11 @@ int popFront(queue_t * queue)
  */
 T front(queue_t * queue)
 {
-    T element;
-    if(isEmptyQueue(queue))
+    T element = NULL;
+    if(!isEmptyQueue(queue))
     {
-        element = NULL;
+        element = queue->base[queue->head];
     }
-    element = queue->base[queue->head];
     return element;
 }
 
@@ -129,6 +123,12 @@ int isFullQueue(queue_t * queue)
  */
 void freeQueue(queue_t * queue)
 {
+    int i = queue->head;
+    while(i != queue->tail) {
+        queue->base[i % queue->capacity] = NULL;
+        ++i;
+    }
+
     free(queue->base);
     free(queue);
     queue = NULL;

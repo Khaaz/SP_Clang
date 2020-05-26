@@ -23,6 +23,6 @@ void     insertSon(node_t *, node_t *);
 void     getPostfix(node_t *, char *, int *);
 void     displayPostfix(char *, int);
 node_t * search(node_t *, char );
-void insertion (node_t *, char, char);
+int insertion (node_t *, char, char);
 
 #endif

@@ -19,62 +19,70 @@ void testTrees(){
     char liste[100];
     int taille = 0;
     node_t * searched = NULL;
+    printf("\n=== TEST: creation arbre ===\n");
     //creation de l'arbre : a*(b*(k*(h+u)+z)+f*m+x*(p+v+w)).
     node_t * tree = createTree("a*(b*(k*(h+u)+z)+f*m+x*(p+v+w))");
+    printf("\n=== TEST: ordre postfix ===\n");
     getPostfix(tree, liste, &taille);
     displayPostfix(liste, taille);
 
+    printf("\n=== TEST: fonction search ===\n");
     //test de la fonction search
     //recherche du noeud a, f, u, w
     searched = search(tree, 'a');
-    printf("recherche du noeud a: %c ", searched->value);
+    printf("recherche du noeud a: %c\n", searched->value);
     searched = search(tree, 'f');
-    printf("recherche du noeud f: %c ", searched->value);
+    printf("recherche du noeud f: %c\n", searched->value);
     searched = search(tree, 'u');
-    printf("recherche du noeud u: %c ", searched->value);
+    printf("recherche du noeud u: %c\n", searched->value);
     searched = search(tree, 'w');
-    printf("recherche du noeud w: %c ", searched->value);
+    printf("recherche du noeud w: %c\n", searched->value);
 
+    printf("\n=== TEST: fonction insertion ===\n");
     //test de la fonction insertion.
-    //insertion a la racine
-    insertion(tree, 'l', 'X' );
+    printf("insertion: racine\n");
+    insertion(tree, 'a', 'l' );
     taille = 0;
     getPostfix(tree, liste, &taille);
     displayPostfix(liste, taille);
 
-    //insertion au milieu
-    insertion(tree, 's', 'X');
+    printf("insertion: milieu\n");
+    insertion(tree, 'k', 's');
     taille = 0;
     getPostfix(tree, liste, &taille);
     displayPostfix(liste, taille);
     
-    //insertion sur une feuille
-    insertion(tree, 'i', 'X');
+    printf("insertion: feuille\n");
+    insertion(tree, 'u', 'i');
     taille = 0;
     getPostfix(tree, liste, &taille);
     displayPostfix(liste, taille);
 
-    //insertion sur un noeud qui n'existe pas
-    insertion(tree, 'e', 'X');
-    
+    printf("insertion: noeud inexistant\n");
+    insertion(tree, 'j', 'e');
 
     //insertion devant la fratrie lors du tri par ordre alphabétique
-    insertion(tree, 'j', 'X');
+    printf("insertion: devant la fratrie\n");
+    insertion(tree, 'x', 'q');
     taille = 0;
     getPostfix(tree, liste, &taille);
     displayPostfix(liste, taille);
 
     //insertion au milieu de la fratrie lors du tri par ordre alphabétique
-    insertion(tree, 'q', 'X');
+    printf("insertion: milieu de la fratrie\n");
+    insertion(tree, 'x', 'r');
     taille = 0;
     getPostfix(tree, liste, &taille);
     displayPostfix(liste, taille);
 
     //insertion  la fin de la fratrie lors du tri par ordre alphabétique
-    insertion(tree, 'y', 'X');
+    printf("insertion: fin de la fratrie\n");
+    insertion(tree, 'x', 'y');
     taille = 0;
     getPostfix(tree, liste, &taille);
     displayPostfix(liste, taille);
+
+    freeTree(tree);
 }
 
 int main(int argc, char ** argv)
@@ -91,7 +99,7 @@ int main(int argc, char ** argv)
     printf("src: %s\n", argv[1]);
     readFile(argv[1], treeString);
 
-    printf("Chaine a trandformer en arbre: %s\n", treeString);
+    printf("Chaine a transformer en arbre: %s\n", treeString);
 
     node_t * tree = createTree(treeString);
     insertion(tree, 'a', 'c');
@@ -99,9 +107,10 @@ int main(int argc, char ** argv)
     getPostfix(tree, list, &size);
     displayPostfix(list, size);
 
-
     freeTree(tree);
-    printf("FINI\n");
+    printf("======TESTS======\n");
+    testTrees();
+
     return 0;
 }
 
