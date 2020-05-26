@@ -63,7 +63,7 @@ void testTrees(){
 
     //insertion devant la fratrie lors du tri par ordre alphabétique
     printf("insertion: devant la fratrie\n");
-    insertion(tree, 'x', 'q');
+    insertion(tree, 'x', 'o');
     taille = 0;
     getPostfix(tree, liste, &taille);
     displayPostfix(liste, taille);
