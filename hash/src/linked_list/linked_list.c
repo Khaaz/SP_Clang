@@ -22,7 +22,7 @@ node_t * createNode(char * word)
     node_t * node = malloc(sizeof(*node));
     if(node != NULL)
     {
-        node->word = malloc(strlen(word) * sizeof char);
+        node->word = malloc(strlen(word) * sizeof(char));
         strcpy(node->word, word);
         node->count = 1;
         node->next  = NULL;
@@ -41,7 +41,7 @@ node_t * createNode(char * word)
  */
 void incrementNode(node_t * node)
 {
-    ++node->count
+    ++node->count;
 }
 
 /**
@@ -63,7 +63,7 @@ void addNextNode(node_t ** prev, node_t * node)
  */
 void displayList(node_t * list)
 {
-    node_t * cur = borrow;
+    node_t * cur = list;
     while(cur != NULL)
     {
         printf("Mot : %s\n", cur->word);
@@ -79,6 +79,7 @@ void displayList(node_t * list)
  */
 void freeList(node_t * list)
 {
+    node_t * tmp;
     while(list != NULL)
     {
         tmp = list->next;
@@ -86,4 +87,14 @@ void freeList(node_t * list)
         free(list);
         list = tmp;
     }
+}
+
+node_t * searchNode(node_t* list, char* word) 
+{
+    node_t * cour = list;
+    while (strcmp(cour->word, word) != 0 && cour != NULL)
+    {
+        cour = cour->next;
+    }
+    return cour;
 }
