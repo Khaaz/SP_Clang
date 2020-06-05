@@ -9,6 +9,19 @@ unsigned int hash_string(const char * str)
     return (hash & 0x7FFFFFFF) % HASH_MAX;
 }
 
+node_t** initHashTable() {
+    node_t ** hashTable = malloc(HASH_MAX * sizeof(node_t));
+    if (hashTable == NULL) {
+        printf("[ERREUR: malloc] <hash_table: init>.\n");
+    } else {
+        for(int i = 0; i < HASH_MAX; i++)
+        {
+            hashTable[i] = initList();
+        }
+    }
+    return hashTable;
+}
+
 void displayTable(node_t * hashTable[])
 {
     for(int i = 0; i < HASH_MAX; i++)
@@ -53,4 +66,12 @@ node_t * get(node_t * hashTable[], char * word)
         node = searchNode(list, word);
     }
     return node;
+}
+
+void freeHashTable(node_t* hashTable[]) {
+    for(int i = 0; i < HASH_MAX; i++)
+    {
+        freeList(hashTable[i]);
+    }
+    free(hashTable);
 }

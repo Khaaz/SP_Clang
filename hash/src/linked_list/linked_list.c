@@ -24,9 +24,13 @@ node_t * createNode(char * word)
     if(node != NULL)
     {
         node->word = malloc(strlen(word) * sizeof(char));
-        strcpy(node->word, word);
-        node->count = 1;
-        node->next  = NULL;
+        if (node->word != NULL) {
+            strcpy(node->word, word);
+            node->count = 1;
+            node->next  = NULL;
+        } else {
+            printf("[ERREUR: malloc] <linked_list: createNode/word>.\n");    
+        }
     }
     else
     {
@@ -80,7 +84,7 @@ void displayList(node_t * list)
  */
 void freeList(node_t * list)
 {
-    node_t * tmp;
+    node_t * tmp = NULL;
     while(list != NULL)
     {
         tmp = list->next;
@@ -93,7 +97,7 @@ void freeList(node_t * list)
 node_t * searchNode(node_t* list, char* word) 
 {
     node_t * cour = list;
-    while (strcmp(cour->word, word) != 0 && cour != NULL)
+    while (cour != NULL && strcmp(cour->word, word) != 0)
     {
         cour = cour->next;
     }
