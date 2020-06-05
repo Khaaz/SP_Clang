@@ -1,6 +1,7 @@
 #include "./linked_list/linked_list.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 #define HASH_MAX 29
 
