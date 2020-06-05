@@ -1,9 +1,8 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include "hash.h"
 
-void initTable(char * path)
+void initTable(node_t * hashTable, char * path)
 {
-    char   mot[50];
+    char   word[50];
     int    currentChar = 0, i = 0;
     FILE * file = fopen(path, "r");
 
@@ -15,12 +14,13 @@ void initTable(char * path)
             while(currentChar != ' ' && currentChar != '.')
             {
                 currentChar = fgetc(file);
-                mot[i]      = currentChar;
+                word[i]     = currentChar;
                 i++;
             }
 
-            mot[i - 1] = '\0';
-            printf("mot : %s ", mot);
+            word[i - 1] = '\0';
+            printf("mot : %s ", word);
+            incrementOrSet(hashTable, word);
             currentChar = 0;
             i           = 0;
 
@@ -29,7 +29,7 @@ void initTable(char * path)
     }
     else
     {
-        printf("ERROR");
+        printf("[ERREUR: file] <main: initTable>.");
     }
 }
 
@@ -42,7 +42,8 @@ void initTable(char * path)
  */
 int main(int argc, char ** argv)
 {
-    initTable("test.txt");
+    node_t * hashTable[HASH_MAP];
+    initTable(hashTable, "test.txt");
 
     return 0;
 }
