@@ -1,4 +1,4 @@
-#include "./hash.h"
+#include "./hash_table.h"
 
 unsigned int hash_string(const char * str)
 {
