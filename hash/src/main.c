@@ -1,3 +1,5 @@
+
+
 void initTable(char * path)
 {}
 
@@ -10,6 +12,7 @@ void initTable(char * path)
  */
 int main(int argc, char ** argv)
 {
+    linkedlist * major[HASH_MAX];
     initTable("./data.text");
 
     return 0;
