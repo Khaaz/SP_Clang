@@ -18,5 +18,6 @@ void     addNextNode(node_t **, node_t *);
 void     incrementNode(node_t *);
 void     displayList(node_t *);
 void     freeList(node_t *);
+node_t * searchNode(node_t*, char*);
 
 #endif
