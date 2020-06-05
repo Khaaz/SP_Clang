@@ -23,7 +23,7 @@ node_t * createNode(char * word)
     node_t * node = malloc(sizeof(*node));
     if(node != NULL)
     {
-        node->word = malloc(strlen(word) * sizeof(char));
+        node->word = malloc((strlen(word) + 1) * sizeof(char));
         if (node->word != NULL) {
             strcpy(node->word, word);
             node->count = 1;
