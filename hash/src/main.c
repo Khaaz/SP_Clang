@@ -43,8 +43,11 @@ void initTable(node_t * hashTable[], char * path)
 int main(int argc, char ** argv)
 {
     node_t ** hashTable = initHashTable();
+    node_t* node=NULL;
     initTable(hashTable, "data.txt");
     displayTable(hashTable);
+    node = get(hashTable, "maxime");
+    printf("MOT: %s compte %d fois\n", node->word, node->count);
     freeHashTable(hashTable);
     return 0;
 }
