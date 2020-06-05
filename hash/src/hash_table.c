@@ -9,11 +9,21 @@ unsigned int hash_string(const char * str)
     return (hash & 0x7FFFFFFF) % HASH_MAX;
 }
 
-node_t** initHashTable() {
+/**
+ * @brief Initialise la strcuture de hashtable. Creer une liste de taille
+ * HASH_MAX et initalise toutes les valeurs a NULL.
+ *
+ * @return node_t** La HashTable creee
+ */
+node_t ** initHashTable()
+{
     node_t ** hashTable = malloc(HASH_MAX * sizeof(node_t));
-    if (hashTable == NULL) {
+    if(hashTable == NULL)
+    {
         printf("[ERREUR: malloc] <hash_table: init>.\n");
-    } else {
+    }
+    else
+    {
         for(int i = 0; i < HASH_MAX; i++)
         {
             hashTable[i] = initList();
@@ -22,6 +32,11 @@ node_t** initHashTable() {
     return hashTable;
 }
 
+/**
+ * @brief Affiche la table
+ *
+ * @param hashTable node_t** - La table a afficher
+ */
 void displayTable(node_t * hashTable[])
 {
     for(int i = 0; i < HASH_MAX; i++)
@@ -30,6 +45,13 @@ void displayTable(node_t * hashTable[])
     }
 }
 
+/**
+ * @brief Ajoute ou incremente le noeud (le mot) pour le mot passe en parametre.
+ * Construit la table.
+ *
+ * @param hashTable node_t** - La table a construire, a incrementer
+ * @param word char* - Le mot a ajouter
+ */
 void incrementOrSet(node_t * hashTable[], char * word)
 {
     int      index = hash_string(word);
@@ -55,6 +77,13 @@ void incrementOrSet(node_t * hashTable[], char * word)
     }
 }
 
+/**
+ * @brief Recupere le noeud pour le mot passe en parametre.
+ *
+ * @param hashTable node_t** - La table a chercher
+ * @param word - char* - Le mot a chercher dans la table
+ * @return node_t* - Le noeud trouve pour le mot cherche
+ */
 node_t * get(node_t * hashTable[], char * word)
 {
     int      index = hash_string(word);
@@ -68,7 +97,13 @@ node_t * get(node_t * hashTable[], char * word)
     return node;
 }
 
-void freeHashTable(node_t* hashTable[]) {
+/**
+ * @brief Libere la table
+ *
+ * @param hashTable node_t** - La table a liberer
+ */
+void freeHashTable(node_t * hashTable[])
+{
     for(int i = 0; i < HASH_MAX; i++)
     {
         freeList(hashTable[i]);

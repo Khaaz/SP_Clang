@@ -24,12 +24,15 @@ node_t * createNode(char * word)
     if(node != NULL)
     {
         node->word = malloc((strlen(word) + 1) * sizeof(char));
-        if (node->word != NULL) {
+        if(node->word != NULL)
+        {
             strcpy(node->word, word);
             node->count = 1;
             node->next  = NULL;
-        } else {
-            printf("[ERREUR: malloc] <linked_list: createNode/word>.\n");    
+        }
+        else
+        {
+            printf("[ERREUR: malloc] <linked_list: createNode/word>.\n");
         }
     }
     else
@@ -42,7 +45,7 @@ node_t * createNode(char * word)
 /**
  * @brief Incremente le nombre d'occurence du mot de ce noeud
  *
- * @param node
+ * @param node node_t* - Le noeud a incrementer
  */
 void incrementNode(node_t * node)
 {
@@ -50,7 +53,7 @@ void incrementNode(node_t * node)
 }
 
 /**
- * @brief Ajoute un neodu a la suite d'un autre noeud dans la liste.
+ * @brief Ajoute un noeux a la suite d'un autre noeud dans la liste.
  *
  * @param prev node_t** - Le noeud precedent
  * @param node node_t* - Le noeud a ajouter
@@ -94,10 +97,17 @@ void freeList(node_t * list)
     }
 }
 
-node_t * searchNode(node_t* list, char* word) 
+/**
+ * @brief Cherche le noeud associe au mot passe en parametre.
+ *
+ * @param list node_t* - La liste
+ * @param word char* - Le mot dont on recherche le noeud
+ * @return node_t*
+ */
+node_t * searchNode(node_t * list, char * word)
 {
     node_t * cour = list;
-    while (cour != NULL && strcmp(cour->word, word) != 0)
+    while(cour != NULL && strcmp(cour->word, word) != 0)
     {
         cour = cour->next;
     }

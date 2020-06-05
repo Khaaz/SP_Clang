@@ -8,7 +8,7 @@
 typedef struct node
 {
     char *        word;  // Le mot
-    int           count; // Lnombre d'apparition du mot
+    int           count; // Le nombre d'apparition du mot
     struct node * next;  // Le maillon suivant
 } node_t;
 
@@ -18,6 +18,6 @@ void     addNextNode(node_t **, node_t *);
 void     incrementNode(node_t *);
 void     displayList(node_t *);
 void     freeList(node_t *);
-node_t * searchNode(node_t*, char*);
+node_t * searchNode(node_t *, char *);
 
 #endif
