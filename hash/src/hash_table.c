@@ -6,12 +6,12 @@ unsigned int hash_string(const char * str)
     const char * s;
     for(s = str; *s; s++)
         hash = ((hash << 5) + hash) + tolower(*s);
-    return (hash & 0x7FFFFFFF) % HASH_ MAX;
+    return (hash & 0x7FFFFFFF)%HASH_MAX;
 }
 
 void displayTable(node_t * hashTable[])
 {
-    for(int i = 0, i < HASH_MAX, i++)
+    for(int i = 0; i < HASH_MAX ; i++)
     {
         displayList(hashTable[i]);
     }
