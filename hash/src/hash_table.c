@@ -41,3 +41,16 @@ void incrementOrSet(node_t * hashTable[], char * word)
         }
     }
 }
+
+node_t * get(node_t * hashTable[], char * word)
+{
+    int      index = hash_string(word);
+    node_t * list  = hashTable[index];
+    node_t * node  = NULL;
+
+    if(list != NULL)
+    {
+        node = searchNode(list, word);
+    }
+    return node;
+}
