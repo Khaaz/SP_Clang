@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define HASH_MAX = 29
+#define HASH_MAX 29
 
-void incrementOrSet(node_t *, char *);
+void incrementOrSet(node_t **, char *);
+node_t* get(node_t **, char *);
