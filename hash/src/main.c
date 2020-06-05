@@ -10,21 +10,20 @@ void initTable(node_t * hashTable[], char * path)
 
     if(file != NULL)
     {
-        do
-        {
-            do
-            {
-                currentChar = fgetc(file);
-                word[i]     = currentChar;
-                i++;
-            } while(currentChar != ' ' && currentChar != '.'&& currentChar != EOF);
+        currentChar = fgetc(file);
 
-            if (currentChar != EOF) {
-                word[i - 1] = '\0';
-                incrementOrSet(hashTable, word);
-                i           = 0;
+        while(currentChar != EOF)
+        {
+            while (currentChar != ' ' && currentChar != '.') {
+                word[i] = currentChar;
+                i++;
+                currentChar = fgetc(file);
             }
-        } while(currentChar != EOF);
+            word[i] = '\0';
+            incrementOrSet(hashTable, word);
+            i           = 0;
+            currentChar = fgetc(file);
+        }
         fclose(file);
     }
     else
@@ -40,7 +39,7 @@ void initTable(node_t * hashTable[], char * path)
  * @param argv char**
  * @return int
  */
-int main(int argc, char ** argv)
+int main()
 {
     node_t ** hashTable = initHashTable();
     node_t* node=NULL;
